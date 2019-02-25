@@ -920,7 +920,7 @@ def main():
     culture = random.choice(list(namegen.items()))
     culture_name = culture[0]
     gender = random.choice(["Male", "Female"])
-    if gender == "Morettaale":
+    if gender == "Male":
         first_name = random.choice(list(culture[1]["male_names"]))
     else:
         first_name = random.choice(list(culture[1]["female_names"]))
