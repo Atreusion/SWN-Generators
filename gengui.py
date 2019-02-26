@@ -5,11 +5,56 @@ if sys.version_info[0] >= 3:
 else:
     import PySimpleGUI27 as sg
   
-layout = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness'), size=(20, 1), key='_IN_')],
-          [sg.Multiline('Generator info', size=(80,10), key='_OUTPUT_')],
-          [sg.Button('Roll'), sg.Button('Exit')]]
+generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness'), size=(20, 1), key='_GENIN_')],
+                    [sg.Multiline('Generator info', size=(80,10), key='_GENOUTPUT_')],
+                    [sg.Button('Roll'), sg.Button('Exit')]]
+
+weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), size=(20, 1), key='_WEAPONIN_')],
+                 [sg.Multiline('Weapon info', size=(80,10), key='_WEAPONOUTPUT_')],
+                 [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")],
+                 [sg.Button('Weapon Info'), sg.Button('Exit')]]
+
+layout = [[sg.Column(generator_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
+
+def weaponinfo(weapon):
+    weapondict = {'Primitive Bow':'Dmg: 1d6\nRange: 50/75\nCost: 15\nMag: 1\nAtr: Dex\nEnc: 2\nTL: 1',
+'Advanced Bow':'Dmg: 1d6\nRange: 100/150\nCost: 50\nMag: 1\nAtr: Dex\nEnc: 2\nTL: 3',
+'Conversion Bow':'Dmg: 1d8\nRange: 150/300\nCost: 500\nMag: 1\nAtr: Dex\nEnc: 2\nTL: 4',
+'Grenade':'Dmg: 2d6\nRange: 10/30\nCost: 25\nMag: N/A\nAtr: Dex\nEnc: 1\nTL: 3',
+'Crude Pistol':'Dmg: 1d6\nRange: 5/15\nCost: 20\nMag: 1@\nAtr: Dex\nEnc: 1\nTL: 2',
+'Musket':'Dmg: 1d12\nRange: 25/50\nCost: 30\nMag: 1@\nAtr: Dex\nEnc: 2\nTL: 2',
+'Revolver':'Dmg: 1d8\nRange: 30/100\nCost: 50\nMag: 6\nAtr: Dex\nEnc: 1\nTL: 2',
+'Rifle':'Dmg: 1d10+2\nRange: 200/400\nCost: 75\nMag: 6\nAtr: Dex\nEnc: 2\nTL: 2',
+'Shotgun':'Dmg: 3d4\nRange: 10/30\nCost: 50\nMag: 2\nAtr: Dex\nEnc: 2\nTL: 2',
+'Semi-Auto Pistol':'Dmg: 1d6+1\nRange: 30/100\nCost: 75\nMag: 12\nAtr: Dex\nEnc: 1\nTL: 3',
+'Submachine Gun':'Dmg: 1d8*\nRange: 30/100\nCost: 200\nMag: 20\nAtr: Dex\nEnc: 1\nTL: 3',
+'Combat Rifle':'Dmg: 1d12*\nRange: 100/300\nCost: 300\nMag: 30\nAtr: Dex\nEnc: 2\nTL: 3',
+'Combat Shotgun':'Dmg: 3d4*\nRange: 10/30\nCost: 300\nMag: 12\nAtr: Dex\nEnc: 2\nTL: 3',
+'Sniper Rifle':'Dmg: 2d8\nRange: 1,000/2,000\nCost: 400\nMag: 1\nAtr: Dex\nEnc: 2\nTL: 3',
+'Void Carbine':'Dmg: 2d6\nRange: 100/300\nCost: 400\nMag: 10\nAtr: Dex\nEnc: 2\nTL: 4',
+'Mag Pistol':'Dmg: 2d6+2\nRange: 100/300\nCost: 400\nMag: 6\nAtr: Dex\nEnc: 1\nTL: 4',
+'Mag Rifle':'Dmg: 2d8+2\nRange: 300/600\nCost: 500\nMag: 10\nAtr: Dex\nEnc: 2\nTL: 4',
+'Spike Thrower':'Dmg: 3d8*\nRange: 20/40\nCost: 600\nMag: 15\nAtr: Dex\nEnc: 2\nTL: 4',
+'Laser Pistol':'Dmg: 1d6\nRange: 100/300\nCost: 200\nMag: 10\nAtr: Dex\nEnc: 1\nTL: 4',
+'Laser Rifle':'Dmg: 1d10*\nRange: 300/500\nCost: 300\nMag: 20\nAtr: Dex\nEnc: 2\nTL: 4',
+'Thermal Pistol':'Dmg: 2d6\nRange: 25/50\nCost: 300\nMag: 5\nAtr: Dex\nEnc: 1\nTL: 4',
+'Plasma Projector':'Dmg: 2d8\nRange: 50/100\nCost: 400\nMag: 6\nAtr: Dex\nEnc: 2\nTL: 4',
+'Shear Rifle':'Dmg: 2d8*\nRange: 100/300\nCost: 600\nMag: 10\nAtr: Dex\nEnc: 2\nTL: 5',
+'Thunder Gun':'Dmg: 2d10\nRange: 100/300\nCost: 1000\nMag: 6\nAtr: Dex\nEnc: 2\nTL: 5',
+'Distortion Cannon':'Dmg: 2d12\nRange: 100/300\nCost: 1250\nMag: 6\nAtr: Dex\nEnc: 2\nTL: 5',
+'Small primitive weapon':'Dmg: 1d4\nShock: 1 point/AC 15\nAtr: Str/Dex\nCost: 0\nEnc: 1\nTL: 0',
+'Medium primitive weapon':'Dmg: 1d6+1\nShock: 2 points/AC 13\nAtr: Str/Dex\nCost: 20\nEnc: 1\nTL: 0',
+'Large primitive weapon':'Dmg: 1d8+1\nShock: 2 points/AC 15\nAtr: Str\nCost: 30\nEnc: 2\nTL: 0',
+'Small advanced weapon':'Dmg: 1d6\nShock: 1 point/AC 15\nAtr: Str/Dex\nCost: 40\nEnc: 1\nTL: 4',
+'Medium advanced weapon':'Dmg: 1d8+1\nShock: 2 points/AC 13\nAtr: Str/Dex\nCost: 60\nEnc: 1\nTL: 4',
+'Large advanced weapon':'Dmg: 1d10+1\nShock: 2 points/AC 15\nAtr: Str\nCost: 80\nEnc: 2\nTL: 4',
+'Stun baton':'Dmg: 1d8\nShock: 1 point/AC 15\nAtr: Str/Dex\nCost: 50\nEnc: 1\nTL: 4',
+'Suit ripper':'Dmg: 1d6\nShock: None\nAtr: Str/Dex\nCost: 75\nEnc: 1\nTL: 4',
+'Unarmed attack':'Dmg: 1d2\nShock: None\nAtr: Str/Dex\nCost: -\nEnc: -\nTL: -'}
+    return weapondict[weapon]
+
 
 def npcgen():
     manner = ["Ingratiating and cloying", "Grim suspicion of the PCs or their backers", "Xenophilic interest in the novelty of the PCs", "Pragmatic and businesslike", "Romantically interested in one or more PCs", "A slimy used-gravcar dealer’s approach", "Wide-eyed awe at the PCs", "Cool and superior attitude toward PC \"hirelings\"", "Benevolently patronizing toward outsiders", "Sweaty-palmed need or desperation", "Xenophobic mistrust of the PCs", "Idealistic enthusiasm for a potentially shared cause", "Somewhat intoxicated by recent indulgence", "Smoothly persuasive and reasonable", "Visibly uncomfortable with the PCs", "Grossly overconfident in PC abilities", "Somewhat frightened by the PCs", "Deeply misunderstanding the PCs’ culture", "Extremely well-informed about the PCs’ past", "Distracted by their current situation"]
@@ -298,15 +343,21 @@ while True:
     output = ""
     if event is None or event == 'Exit':
         break
-    if event == 'Roll' and values['_IN_'] == 'NPC':
+    if event == 'Roll' and values['_GENIN_'] == 'NPC':
         output = npcgen()
-    if event == 'Roll' and values['_IN_'] == 'Problem':
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Roll' and values['_GENIN_'] == 'Problem':
         output = problemgen()
-    if event == 'Roll' and values['_IN_'] == 'Urban':
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Roll' and values['_GENIN_'] == 'Urban':
         output = urbangen()
-    if event == 'Roll' and values['_IN_'] == 'Wilderness':
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Roll' and values['_GENIN_'] == 'Wilderness':
         output = wildernessgen()
-    window.FindElement('_OUTPUT_').Update(output)
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Weapon Info':
+        output = weapongen(values['_WEAPONIN_'])
+        window.FindElement('_WEAPONOUTPUT_').Update(output)
 
 window.Close()
   
