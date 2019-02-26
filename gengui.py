@@ -6,30 +6,10 @@ else:
     import PySimpleGUI27 as sg
   
 layout = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness'), size=(20, 1), key='_IN_')],
-          [sg.Multiline('Generator info', size=(45,10), key='_OUTPUT_')],
+          [sg.Multiline('Generator info', size=(80,10), key='_OUTPUT_')],
           [sg.Button('Roll'), sg.Button('Exit')]]
   
 window = sg.Window('SWN Generator').Layout(layout)
-  
-while True: 
-    event, values = window.Read()
-    print(event)
-    print(values)
-    output = ""
-    if event is None or event == 'Exit':
-        break
-    if event == 'Roll' and values['_IN_'] == 'NPC':
-        print("NPC")
-        output = npcgen()
-    if event == 'Roll' and values['_IN_'] == 'Problem':
-        output = "Problem"
-    if event == 'Roll' and values['_IN_'] == 'Urban':
-        output = "Urban"
-    if event == 'Roll' and values['_IN_'] == 'Wilderness':
-        output = "Wilderness"
-    window.FindElement('_OUTPUT_').Update(output)
-
-window.Close()
 
 def npcgen():
     manner = ["Ingratiating and cloying", "Grim suspicion of the PCs or their backers", "Xenophilic interest in the novelty of the PCs", "Pragmatic and businesslike", "Romantically interested in one or more PCs", "A slimy used-gravcar dealer’s approach", "Wide-eyed awe at the PCs", "Cool and superior attitude toward PC \"hirelings\"", "Benevolently patronizing toward outsiders", "Sweaty-palmed need or desperation", "Xenophobic mistrust of the PCs", "Idealistic enthusiasm for a potentially shared cause", "Somewhat intoxicated by recent indulgence", "Smoothly persuasive and reasonable", "Visibly uncomfortable with the PCs", "Grossly overconfident in PC abilities", "Somewhat frightened by the PCs", "Deeply misunderstanding the PCs’ culture", "Extremely well-informed about the PCs’ past", "Distracted by their current situation"]
@@ -93,15 +73,240 @@ def npcgen():
     npc_want = random.choice(list(want))
     npc_power = random.choice(list(power))
     npc_hook = random.choice(list(hook))
-    output = "NPC Name: " + first_name + " " + last_name + "\n\
-    Age: " + age + "\n\
-    Gender: " + gender + "\n\
-    Culture: " + culture_name + "\n\
-    Manner: " + npc_manner + "\n\
-    Outcome: " + npc_outcome + "\n\
-    Motivation: " + npc_motivation + "\n\
-    Want: " + npc_want + "\n\
-    Power: " + npc_power + "\n\
-    Hook: " + npc_hook
+    output = "NPC Name: " + first_name + " " + last_name + \
+    "\nAge: " + age + \
+    "\nGender: " + gender + \
+    "\nCulture: " + culture_name + \
+    "\nManner: " + npc_manner + \
+    "\nOutcome: " + npc_outcome + \
+    "\nMotivation: " + npc_motivation + \
+    "\nWant: " + npc_want + \
+    "\nPower: " + npc_power + \
+    "\nHook: " + npc_hook
     return output
+
+def problemgen():
+    money = {"Situation":["Money is owed to a ruthless creditor","Money was stolen from someone","A sudden profit opportunity arises","There’s a hidden stash of wealth","Money is offered from an evil source"],
+"Focus":["Organized crime wants it","Corrupt officials want it","A sympathetic NPC needs it","The PCs are owed it","It will disappear very soon"]}
+    revenge = {"Situation":["Someone was murdered","Someone was stripped of rank","Someone lost all their wealth","Someone lost someone’s love","Someone was framed for a crime"],
+"Focus":["It was wholly justified","The wrong person is targeted","The reaction is excessive","The PCs are somehow blamed","Both sides were wronged"]}
+    power = {"Situation":["An influential political leader","A stern community elder","A ruling patriarch of a large family","A star expert in a particular industry","A criminal boss or outcast leader"],
+"Focus":["They’ve betrayed their own","Someone’s gunning for them","They made a terrible choice","They usurped their position","They’re oppressing their own"]}
+    natural_danger = {"Situation":["A cyclical planetary phenomenon","A sudden natural disaster","Sudden loss of vital infrastructure","Catastrophe from outside meddling","Formerly unknown planetary peril"],
+"Focus":["Anti-helpful bureaucrats","Religious zealots panic","Bandits and looters strike","The government hushes it up","There’s money in exploiting it"]}
+    religion = {"Situation":["Sects that hate each other bitterly","Zealot reformers forcing new things","Radical traditionalists fighting back","Ethnic religious divisions","Corrupt and decadent institutions"],
+"Focus":["Charismatic new leader","Mandatory state religion","Heavy foreign influence","Religious purging underway","Fighting for holy ground"]}
+    ideology = {"Situation":["A universally-despised fringe group","Terrorists with widespread support","A political party’s goon squads","Dead-end former regime supporters","Ruthless ascendant political group"],
+"Focus":["Terrorist attack","Street rioting","Police state crackdown","Forced expulsions","Territory under hostile rule"]}
+    ethnicity = {"Situation":["A traditionally subordinate group","An ethnic group from offworld","A dominant caste or ethnicity","An alien or transhuman group","Two groups that hate each other"],
+"Focus":["Forced immigration","Official ethnic ghettos","Rigid separation of groups","Group statuses have changed","Rising ethnic violence"]}
+    resources = {"Situation":["There’s a cache of illegal materials","A hidden strike of rare resources","Cargo has been abandoned as lost","Land ownership is disputed","A resource is desperately necessary"],
+"Focus":["Someone thinks they own it","The state is looking for it","It has its own protectors","Rights to it were stolen","Offworlders want it badly"]}
+    conflict_dict = {"Money":money, "Revenge":revenge, "Power":power, "Natural Danger":natural_danger, "Religion":religion, "Ideology":ideology, "Ethnicity":ethnicity, "Resources":resources}
+    restraint_list = ["The government is cracking down on the conflict",
+"One side seems invincibly stronger to the other",
+"Both sides have \"doomsday\" info or devices",
+"A prior conflict ended horribly for both of them",
+"Foreign participants are keeping things tamped",
+"Elements of both sides seek accommodation",
+"The conflict is only viable in a narrow location",
+"Catastrophic cost of losing a direct showdown",
+"Each thinks they’ll win without further exertion",
+"They expect a better opening to appear soon",
+"Former ties of friendship or family restrain them",
+"Religious principles are constraining them",
+"One side’s still licking their wounds after a failure",
+"They’re building up force to make sure they win",
+"Their cultural context makes open struggle hard",
+"They expect an outside power to hand them a win",
+"They’re still searching for a way to get at their goal",
+"One side mistakenly thinks they’ve already won",
+"A side is busy integrating a recent success",
+"An outside power threatens both sides"]
+    twist_list = ["There’s a very sharp time limit for any resolution",
+"The sympathetic side is actually a bunch of bastards",
+"There’s an easy but very repugnant solution to hand",
+"PC success means a big benefit to a hostile group",
+"The real bone of contention is hidden from most",
+"A sympathetic figure’s on an unsympathetic side",
+"There’s a profitable chance for PCs to turn traitor",
+"The \"winner\" will actually get in terrible trouble",
+"There’s a very appealing third party in the mix",
+"The PCs could really profit off the focus of the strife",
+"The PCs are mistaken for an involved group",
+"Somebody plans on screwing over the PCs",
+"Both sides think the PCs are working for them",
+"A side wants to use the PCs as a distraction for foes",
+"The PCs’ main contact is mistrusted by their allies",
+"If the other side can’t get it, they’ll destroy it",
+"The focus isn’t nearly as valuable as both sides think",
+"The focus somehow has its own will and goals",
+"Victory will drastically change one of the sides",
+"Actually, there is no twist. It’s all exactly as it seems."]
+    conflict = random.choice(list(conflict_dict.items()))
+    focus = random.choice(conflict[1]["Focus"])
+    situation = random.choice(conflict[1]["Situation"])
+    restraint = random.choice(restraint_list)
+    twist = random.choice(twist_list)
+    output = conflict[0] + " Situation: " + situation + "\n" + \
+    conflict[0] + " Focus: " + focus + "\nRestraint: " + restraint + "\nTwist: " + twist
+    return output
+
+def urbangen():
+    venue = ["Venue: In the middle of the street",
+"Venue: In a public plaza",
+"Venue: Down a side alley",
+"Venue: Inside a local business",
+"Venue: Next to or in a public park",
+"Venue: At a mass-transit station"]
+    pc_involvment = ["Why PCs are involved: A sympathetic participant appeals to them",
+"Why PCs are involved: Ways around it are all dangerous/blocked",
+"Why PCs are involved: It happens immediately around them",
+"Why PCs are involved: A valuable thing looks snatchable amid it",
+"Why PCs are involved: A participant offers a reward for help",
+"Why PCs are involved: Someone mistakenly involves the PCs in it",
+"Why PCs are involved: The seeming way out just leads deeper in",
+"Why PCs are involved: Responsibility is somehow pinned on them"]
+    nature = ["Nature of event: A parade or festival is being disrupted",
+"Nature of event: Innocents are being assaulted",
+"Nature of event: An establishment is being robbed",
+"Nature of event: A disturbance over local politics happens",
+"Nature of event: Someone is being blamed for something",
+"Nature of event: Fires or building collapses are happening",
+"Nature of event: A medical emergency is happening",
+"Nature of event: Someone’s trying to cheat the PCs",
+"Nature of event: A vehicle accident is happening",
+"Nature of event: A religious ceremony is being disrupted"]
+    conflict = ["Conflict about: Money, extortion, payment due, debts",
+"Conflict about: Respect, submission to social authority",
+"Conflict about: Grudges, ethnic resentment, gang payback",
+"Conflict about: Politics, religion, or other ideology"]
+    antagonists = ["Antagonists: A local bully and their thugs",
+"Antagonists: A ruthless political boss and their zealots",
+"Antagonists: Violent criminals",
+"Antagonists: Religious fanatics",
+"Antagonists: A blisteringly obnoxious offworlder",
+"Antagonists: Corrupt or over-strict government official",
+"Antagonists: A mob of intoxicated locals",
+"Antagonists: A ranting demagogue and their followers",
+"Antagonists: A stupidly bull-headed local grandee",
+"Antagonists: A very capable assassin or strong-arm",
+"Antagonists: A self-centered local scion of power",
+"Antagonists: A confused foreigner or backwoodsman"]
+    features = ["Revelant urban features:Heavy traffic running through the place",
+"Revelant urban features: Music blaring at deafening volumes",
+"Revelant urban features: Two groups present that detest each other",
+"Revelant urban features: Large delivery taking place right there",
+"Revelant urban features: Swarm of schoolkids or feral youth",
+"Revelant urban features: Insistent soapbox preacher here",
+"Revelant urban features: Several pickpockets working the crowd",
+"Revelant urban features: A kiosk is tipping over and spilling things",
+"Revelant urban features: Streetlights are out or visibility is low",
+"Revelant urban features: A cop patrol is here and reluctant to act",
+"Revelant urban features: PC-hostile reporters are recording here",
+"Revelant urban features: Someone’s trying to sell something to PCs",
+"Revelant urban features: Feral dogs or other animals crowd here",
+"Revelant urban features: Unrelated activists are protesting here",
+"Revelant urban features: Street kids are trying to steal from the PCs",
+"Revelant urban features: GPS maps are dangerously wrong here",
+"Revelant urban features: Downed power lines are a danger here",
+"Revelant urban features: Numerous open manholes and utility holes",
+"Revelant urban features: The street’s blockaded by something",
+"Revelant urban features: Crowds so thick one can barely move"]
+    output = random.choice(venue) + "\n" + \
+    random.choice(pc_involvment) + "\n" + \
+    random.choice(nature) + "\n" + \
+    random.choice(conflict) + "\n" + \
+    random.choice(antagonists) + "\n" + \
+    random.choice(features)
+    return output
+
+def wildernessgen():
+    weather = ["Weather and Lighting: Takes place in daylight and clear weather",
+"Weather and Lighting: Daylight, but fog, mist, rain or the like",
+"Weather and Lighting: Daylight, but harsh seasonal weather",
+"Weather and Lighting: Night encounter, but clear weather",
+"Weather and Lighting: Night, with rain or other obscuring effects",
+"Weather and Lighting: Night, with terrible weather and wind"]
+    nature = ["Nature of encounter: Attack by pack of hostiles",
+"Nature of encounter: Ambush by single lone hostile",
+"Nature of encounter: Meet people who don’t want to be met",
+"Nature of encounter: Encounter people in need of aid",
+"Nature of encounter: Encounter hostile creatures",
+"Nature of encounter: Nearby feature is somehow dangerous",
+"Nature of encounter: Nearby feature promises useful loot",
+"Nature of encounter: Meet hostiles that aren’t immediately so"]
+    friendly = ["Friendly creature(s): Affable but reclusive hermit",
+"Friendly creature(s): Local herd animal let loose to graze",
+"Friendly creature(s): Government ranger or circuit judge",
+"Friendly creature(s): Curious local animal",
+"Friendly creature(s): Remote homesteader and family",
+"Friendly creature(s): Working trapper or hunter",
+"Friendly creature(s): Back-country villager or native",
+"Friendly creature(s): Hiker or wilderness tourist",
+"Friendly creature(s): Religious recluse or holy person",
+"Friendly creature(s): Impoverished social exile"]
+    enc_range = ["Encounter Range: Visible from a long distance away",
+"Encounter Range: Noticed 1d4 hundred meters away",
+"Encounter Range: Noticed only within 1d60 meters",
+"Encounter Range: Noticed only when adjacent to the event"]
+    hostile = ["Hostile creature(s): Bandits in their wilderness hideout",
+"Hostile creature(s): Dangerous locals looking for easy marks",
+"Hostile creature(s): Rabid or diseased large predator",
+"Hostile creature(s): Pack of hungry hunting beasts",
+"Hostile creature(s): Herd of potentially dangerous prey animals",
+"Hostile creature(s): Swarm of dangerous vermin",
+"Hostile creature(s): Criminal seeking to evade the law",
+"Hostile creature(s): Brutal local landowner and their men",
+"Hostile creature(s): Crazed hermit seeking enforced solitude",
+"Hostile creature(s): Friendly-seeming guide into lethal danger",
+"Hostile creature(s): Harmless-looking but dangerous beast",
+"Hostile creature(s): Confidence man seeking to gull the PCs"]
+    features = ["Nearby feature: Overgrown homestead",
+"Nearby feature: Stream prone to flash-flooding",
+"Nearby feature: Narrow bridge or beam over deep cleft",
+"Nearby feature: Box canyon with steep sides",
+"Nearby feature: Unstable hillside that slides if disturbed",
+"Nearby feature: Long-lost crash site of a gravflyer",
+"Nearby feature: Once-inhabited cave or tunnel",
+"Nearby feature: Steep and dangerous cliff",
+"Nearby feature: Quicksand-laden swamp or dust pit",
+"Nearby feature: Ruins of a ghost town or lost hamlet",
+"Nearby feature: Hunting cabin with necessities",
+"Nearby feature: Ill-tended graveyard of a lost family stead",
+"Nearby feature: Narrow pass that’s easily blocked",
+"Nearby feature: Dilapidated resort building",
+"Nearby feature: Remote government monitoring outpost",
+"Nearby feature: Illicit substance farm or processing center",
+"Nearby feature: Old and forgotten battleground",
+"Nearby feature: Zone overrun by dangerous plants",
+"Nearby feature: Thick growth that lights up at a spark",
+"Nearby feature: Abandoned vehicle"]
+    encounter_range = random.choice(enc_range)
+    encounter_range = encounter_range.replace("1d4", str(random.randint(1,4)))
+    encounter_range = encounter_range.replace("1d6", str(random.randint(1,6)))
+    output = random.choice(weather) + "\n" + \
+    random.choice(nature) + "\n" + \
+    random.choice(friendly) + "\n" + \
+    encounter_range + "\n" + \
+    random.choice(hostile) + "\n" + \
+    random.choice(features)
+    return output
+
+while True: 
+    event, values = window.Read()
+    output = ""
+    if event is None or event == 'Exit':
+        break
+    if event == 'Roll' and values['_IN_'] == 'NPC':
+        output = npcgen()
+    if event == 'Roll' and values['_IN_'] == 'Problem':
+        output = problemgen()
+    if event == 'Roll' and values['_IN_'] == 'Urban':
+        output = urbangen()
+    if event == 'Roll' and values['_IN_'] == 'Wilderness':
+        output = wildernessgen()
+    window.FindElement('_OUTPUT_').Update(output)
+
+window.Close()
   
