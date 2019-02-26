@@ -119,16 +119,17 @@ def npcgen():
     npc_want = random.choice(list(want))
     npc_power = random.choice(list(power))
     npc_hook = random.choice(list(hook))
-    output = "NPC Name: " + first_name + " " + last_name + \
-    "\nAge: " + age + \
-    "\nGender: " + gender + \
-    "\nCulture: " + culture_name + \
-    "\nManner: " + npc_manner + \
-    "\nOutcome: " + npc_outcome + \
-    "\nMotivation: " + npc_motivation + \
-    "\nWant: " + npc_want + \
-    "\nPower: " + npc_power + \
-    "\nHook: " + npc_hook
+    output = textwrap.dedent(f"\
+    NPC Name: {first_name} {last_name}
+    Age: {age}
+    Gender: {gender}
+    Culture: {culture_name}
+    Manner: {npc_manner}
+    Outcome: {npc_outcome}
+    Motivation: {npc_motivation}
+    Want: {npc_want}
+    Power: {npc_power}
+    Hook: {npc_hook}")
     return output
 
 def problemgen():
