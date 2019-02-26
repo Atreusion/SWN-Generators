@@ -14,7 +14,8 @@ weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced 
                  [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")],
                  [sg.Button('Weapon Info'), sg.Button('Exit')]]
 
-layout = [[sg.Column(generator_column)]]
+layout = [[sg.Column(generator_column)],
+         [sg.Column(weapon_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
 
