@@ -5,7 +5,7 @@ if sys.version_info[0] >= 3:
 else:
     import PySimpleGUI27 as sg
   
-generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast'), auto_size_text=True, key='_GENIN_', readonly=True)],
+generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
                     [sg.Multiline('Generator info', size=(80,13), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate'), sg.Button('Exit')]]
 
@@ -23,7 +23,7 @@ layout = [[sg.Column(generator_column), sg.Column(roller_column)],
   
 window = sg.Window('SWN Generator').Layout(layout)
 
-def beastgen():
+def beaststylegen():
     featurelist = ['Amphibian:  froggish or newtlike',
                    'Bird:  winged and feathered',
                    'Fish:  scaled and torpedo-bodied',
@@ -831,8 +831,8 @@ while True:
     if event == 'Generate' and values['_GENIN_'] == 'One-roll Patron':
         output = onerollpatrongen()
         window.FindElement('_GENOUTPUT_').Update(output)
-    if event == 'Generate' and values['_GENIN_'] == 'Beast':
-        output = beastgen()
+    if event == 'Generate' and values['_GENIN_'] == 'Beast Style':
+        output = beaststylegen()
         window.FindElement('_GENOUTPUT_').Update(output)
     if event == '_WEAPONIN_':
         output = weapongen(values['_WEAPONIN_'])
