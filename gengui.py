@@ -6,20 +6,21 @@ else:
     import PySimpleGUI27 as sg
   
 generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness'), size=(20, 1), key='_GENIN_')],
-                    [sg.Multiline('Generator info', size=(80,10), key='_GENOUTPUT_')],
+                    [sg.Multiline('Generator info', size=(80,10), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Roll'), sg.Button('Exit')]]
 
 weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), size=(20, 1), key='_WEAPONIN_')],
-                 [sg.Multiline('Weapon info', size=(80,10), key='_WEAPONOUTPUT_')],
+                 [sg.Multiline('Weapon info', size=(80,10), key='_WEAPONOUTPUT_', do_not_clear=True)],
                  [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")],
                  [sg.Button('Weapon Info'), sg.Button('Exit')]]
 
-layout = [[sg.Column(generator_column)],
-         [sg.Column(weapon_column)]]
+layout = [[sg.Column(generator_column), sg.Column(weapon_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
 
-def weaponinfo(weapon):
+def roller(dice):
+
+def weapongen(weapon):
     weapondict = {'Primitive Bow':'Dmg: 1d6\nRange: 50/75\nCost: 15\nMag: 1\nAtr: Dex\nEnc: 2\nTL: 1',
 'Advanced Bow':'Dmg: 1d6\nRange: 100/150\nCost: 50\nMag: 1\nAtr: Dex\nEnc: 2\nTL: 3',
 'Conversion Bow':'Dmg: 1d8\nRange: 150/300\nCost: 500\nMag: 1\nAtr: Dex\nEnc: 2\nTL: 4',
@@ -119,18 +120,16 @@ def npcgen():
     npc_want = random.choice(list(want))
     npc_power = random.choice(list(power))
     npc_hook = random.choice(list(hook))
-    output = (
-    f"NPC Name: {first_name} {last_name}\n"
-    f"Age: {age}\n"
-    f"Gender: {gender}\n"
-    f"Culture: {culture_name}\n"
-    f"Manner: {npc_manner}\n"
-    f"Outcome: {npc_outcome}\n"
-    f"Motivation: {npc_motivation}\n"
-    f"Want: {npc_want}\n"
-    f"Power: {npc_power}\n"
-    f"Hook: {npc_hook}"
-    )
+    output = (f"NPC Name: {first_name} {last_name}\n"
+              f"Age: {age}\n"
+              f"Gender: {gender}\n"
+              f"Culture: {culture_name}\n"
+              f"Manner: {npc_manner}\n"
+              f"Outcome: {npc_outcome}\n"
+              f"Motivation: {npc_motivation}\n"
+              f"Want: {npc_want}\n"
+              f"Power: {npc_power}\n"
+              f"Hook: {npc_hook}")
     return output
 
 def problemgen():
@@ -152,52 +151,53 @@ def problemgen():
 "Focus":["Someone thinks they own it","The state is looking for it","It has its own protectors","Rights to it were stolen","Offworlders want it badly"]}
     conflict_dict = {"Money":money, "Revenge":revenge, "Power":power, "Natural Danger":natural_danger, "Religion":religion, "Ideology":ideology, "Ethnicity":ethnicity, "Resources":resources}
     restraint_list = ["The government is cracking down on the conflict",
-"One side seems invincibly stronger to the other",
-"Both sides have \"doomsday\" info or devices",
-"A prior conflict ended horribly for both of them",
-"Foreign participants are keeping things tamped",
-"Elements of both sides seek accommodation",
-"The conflict is only viable in a narrow location",
-"Catastrophic cost of losing a direct showdown",
-"Each thinks they’ll win without further exertion",
-"They expect a better opening to appear soon",
-"Former ties of friendship or family restrain them",
-"Religious principles are constraining them",
-"One side’s still licking their wounds after a failure",
-"They’re building up force to make sure they win",
-"Their cultural context makes open struggle hard",
-"They expect an outside power to hand them a win",
-"They’re still searching for a way to get at their goal",
-"One side mistakenly thinks they’ve already won",
-"A side is busy integrating a recent success",
-"An outside power threatens both sides"]
+                      "One side seems invincibly stronger to the other",
+                      "Both sides have \"doomsday\" info or devices",
+                      "A prior conflict ended horribly for both of them",
+                      "Foreign participants are keeping things tamped",
+                      "Elements of both sides seek accommodation",
+                      "The conflict is only viable in a narrow location",
+                      "Catastrophic cost of losing a direct showdown",
+                      "Each thinks they’ll win without further exertion",
+                      "They expect a better opening to appear soon",
+                      "Former ties of friendship or family restrain them",
+                      "Religious principles are constraining them",
+                      "One side’s still licking their wounds after a failure",
+                      "They’re building up force to make sure they win",
+                      "Their cultural context makes open struggle hard",
+                      "They expect an outside power to hand them a win",
+                      "They’re still searching for a way to get at their goal",
+                      "One side mistakenly thinks they’ve already won",
+                      "A side is busy integrating a recent success",
+                      "An outside power threatens both sides"]
     twist_list = ["There’s a very sharp time limit for any resolution",
-"The sympathetic side is actually a bunch of bastards",
-"There’s an easy but very repugnant solution to hand",
-"PC success means a big benefit to a hostile group",
-"The real bone of contention is hidden from most",
-"A sympathetic figure’s on an unsympathetic side",
-"There’s a profitable chance for PCs to turn traitor",
-"The \"winner\" will actually get in terrible trouble",
-"There’s a very appealing third party in the mix",
-"The PCs could really profit off the focus of the strife",
-"The PCs are mistaken for an involved group",
-"Somebody plans on screwing over the PCs",
-"Both sides think the PCs are working for them",
-"A side wants to use the PCs as a distraction for foes",
-"The PCs’ main contact is mistrusted by their allies",
-"If the other side can’t get it, they’ll destroy it",
-"The focus isn’t nearly as valuable as both sides think",
-"The focus somehow has its own will and goals",
-"Victory will drastically change one of the sides",
-"Actually, there is no twist. It’s all exactly as it seems."]
+                  "The sympathetic side is actually a bunch of bastards",
+                  "There’s an easy but very repugnant solution to hand",
+                  "PC success means a big benefit to a hostile group",
+                  "The real bone of contention is hidden from most",
+                  "A sympathetic figure’s on an unsympathetic side",
+                  "There’s a profitable chance for PCs to turn traitor",
+                  "The \"winner\" will actually get in terrible trouble",
+                  "There’s a very appealing third party in the mix",
+                  "The PCs could really profit off the focus of the strife",
+                  "The PCs are mistaken for an involved group",
+                  "Somebody plans on screwing over the PCs",
+                  "Both sides think the PCs are working for them",
+                  "A side wants to use the PCs as a distraction for foes",
+                  "The PCs’ main contact is mistrusted by their allies",
+                  "If the other side can’t get it, they’ll destroy it",
+                  "The focus isn’t nearly as valuable as both sides think",
+                  "The focus somehow has its own will and goals",
+                  "Victory will drastically change one of the sides",
+                  "Actually, there is no twist. It’s all exactly as it seems."]
     conflict = random.choice(list(conflict_dict.items()))
     focus = random.choice(conflict[1]["Focus"])
     situation = random.choice(conflict[1]["Situation"])
     restraint = random.choice(restraint_list)
     twist = random.choice(twist_list)
-    output = conflict[0] + " Situation: " + situation + "\n" + \
-    conflict[0] + " Focus: " + focus + "\nRestraint: " + restraint + "\nTwist: " + twist
+    output = (f"{conflict[0]} Siutation: {situation}\n"
+              f"{conflict[0]} Focus: {focus}\nRestraint: {restraint}\n"
+              f"Twist: {twist}")
     return output
 
 def urbangen():
@@ -261,12 +261,9 @@ def urbangen():
 "Revelant urban features: Numerous open manholes and utility holes",
 "Revelant urban features: The street’s blockaded by something",
 "Revelant urban features: Crowds so thick one can barely move"]
-    output = random.choice(venue) + "\n" + \
-    random.choice(pc_involvment) + "\n" + \
-    random.choice(nature) + "\n" + \
-    random.choice(conflict) + "\n" + \
-    random.choice(antagonists) + "\n" + \
-    random.choice(features)
+    output = (f"{random.choice(venue)}\n{random.choice(pc_involvment)}\n"
+              f"{random.choice(nature)}\n{random.choice(conflict)}\n"
+              f"{random.choice(antagonists)}\n{random.choice(features)}")
     return output
 
 def wildernessgen():
@@ -333,12 +330,9 @@ def wildernessgen():
     encounter_range = random.choice(enc_range)
     encounter_range = encounter_range.replace("1d4", str(random.randint(1,4)))
     encounter_range = encounter_range.replace("1d6", str(random.randint(1,6)))
-    output = random.choice(weather) + "\n" + \
-    random.choice(nature) + "\n" + \
-    random.choice(friendly) + "\n" + \
-    encounter_range + "\n" + \
-    random.choice(hostile) + "\n" + \
-    random.choice(features)
+    output = (f"{random.choice(weather)}\n{random.choice(nature)}\n"
+              f"{random.choice(friendly)}\n{encounter_range}\n"
+              f"{random.choice(hostile)}\n{random.choice(features)}")
     return output
 
 while True: 
@@ -363,4 +357,3 @@ while True:
         window.FindElement('_WEAPONOUTPUT_').Update(output)
 
 window.Close()
-  
