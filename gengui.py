@@ -49,6 +49,7 @@ def npcinfogen(npc):
             "Skilled Professional":"HD: 1\nAC: 10\nAtk: +0\nDmg.: By weapon\nMove: 10m\nML: 6\nSkills: +2\nSaves: 15+",
             "Warrior Tyrant":"HD: 8\nAC: 20 (powered)\nAtk: +10\nDmg.: By weapon +3\nMove: 10m\nML: 11\nSkills: +3\nSaves: 11+"}
     output = f"{npc}\n{npcs[npc]}"
+    return output
 
 def beastinfogen(beast):
     beasts = {"Small Vicious Beast":"HD: 1 HP\nAC: 14\nAtk.: +1\nDmg.: 1d2\nMove: 10m\nML: 7\nSkills: +1\nSaves: 15+",
@@ -60,6 +61,7 @@ def beastinfogen(beast):
               "Terrifying Apex Predator":"HD: 8\nAC: 16\nAtk.: +8x2\nDmg.: 1d10 each\nMove: 20m\nML: 9\nSkills: +2\nSaves: 11+",
               "Gengineered Murder Beast":"HD: 10\nAC: 18\nAtk.: +10x4\nDmg.: 1d10 each\nMove: 20m\nML: 11\nSkills: +3\nSaves: 10+"}
     output = f"{beast}\n{beasts[beast]}"
+    return output
 
 def beaststylegen():
     featurelist = ['Amphibian:  froggish or newtlike',
@@ -846,8 +848,8 @@ def wildernessgen():
 
 while True: 
     event, values = window.Read()
-    print(event)
-    print(values)
+#    print(event)
+#    print(values)
     output = ""
     if event is None or event == 'Exit':
         break
