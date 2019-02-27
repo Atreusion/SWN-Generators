@@ -5,17 +5,16 @@ if sys.version_info[0] >= 3:
 else:
     import PySimpleGUI27 as sg
   
-generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron'), size=(20, 1), key='_GENIN_')],
+generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron'), auto_size_text=True, key='_GENIN_', readonly=True)],
                     [sg.Multiline('Generator info', size=(80,10), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate'), sg.Button('Exit')]]
 
-weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), size=(20, 1), key='_WEAPONIN_')],
+weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
                  [sg.Multiline('Weapon info', size=(80,10), key='_WEAPONOUTPUT_', do_not_clear=True)],
                  [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")],
-                 [sg.Button('Weapon Info'), sg.Button('Exit')]]
+                 [sg.Button('Exit')]]
 
-roller_column = [[sg.Text('Dice Roller:')],
-                 [sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (5, 1), do_not_clear=True, key = "_SIDESINPUT_")],
+roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (3, 1), do_not_clear=True, key = "_SIDESINPUT_")],
                  [sg.Multiline("Rolls and total", size=(80,5), key = "_ROLLSOUTPUT_", do_not_clear=True)],
                  [sg.Button("Roll"), sg.Button('Exit'), sg.Text("Limit of 20 dice and 10,000 sides.")]]
 
@@ -714,6 +713,8 @@ def wildernessgen():
 
 while True: 
     event, values = window.Read()
+    print(event)
+    print(values)
     output = ""
     if event is None or event == 'Exit':
         break
@@ -735,7 +736,7 @@ while True:
     if event == 'Generate' and values['_GENIN_'] == 'One-roll Patron':
         output = onerollpatrongen()
         window.FindElement('_GENOUTPUT_').Update(output)
-    if event == 'Weapon Info':
+    if event == '_WEAPONIN_':
         output = weapongen(values['_WEAPONIN_'])
         window.FindElement('_WEAPONOUTPUT_').Update(output)
     if event == "Roll" and values["_ROLLSINPUT_"] and values["_SIDESINPUT_"]:
