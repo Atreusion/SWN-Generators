@@ -23,7 +23,7 @@ beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "S
                     [sg.Button('Exit')]]
 
 layout = [[sg.Column(generator_column), sg.Column(roller_column)],
-          [sg.Column(weapon_column)], sh.Column(beastinfo_column)]]
+          [sg.Column(weapon_column)], sg.Column(beastinfo_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
 
