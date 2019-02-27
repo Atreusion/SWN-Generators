@@ -30,3 +30,7 @@ I have yet to try to install and run this on Linux. I should be able to eventual
 ## Running the SWN Generator
 
 Running the generator is fairly straightforward from here. Download [the file](https://github.com/Atreusion/SWN-Generators/raw/master/gengui.py) and either double-click it or run it through ```py``` or ```python3```.
+
+## Permission
+
+Lovingly made with [permission from Kevin Crawford himself](https://old.reddit.com/r/SWN/comments/av868q/random_generator/ehdm603/).
