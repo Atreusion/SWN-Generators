@@ -1,7 +1,11 @@
 # SWN Generators
 A small set of generators for Stars Without Number Revised Edition. 12/29/2017 Edition.
 
-This should be cross-platform, but I have yet to test it on anything other than Windows. I have included a standalone .exe, as the installation procedure as it stands leaves a lot to be desired as an end user.
+Mainly made as a test to see if I could do it. I wanted originally to just have CLI scripts, but after finding the amazingly wonderful [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI) I decided to lump it all in to a GUI program. Jury is still out on whether or not that was a good decision, since I am the worst at UX. Just look at it. Ugh.
+
+![Oh god it's ugly](screenshot.PNG "Oh god it's ugly")
+
+This should be cross-platform, but I have yet to test it on anything other than Windows. I have included a standalone .exe, as the installation procedure as it stands leaves a lot to be desired as an end user. If you don't trust it, [do it yourself](https://pysimplegui.readthedocs.io/#creating-a-windows-exe-file). I don't blame you! 
 
 ## Installation
 
@@ -33,4 +37,4 @@ Running the generator is fairly straightforward from here. Download [the file](h
 
 ## Permission
 
-Lovingly made with [permission from Kevin Crawford himself](https://old.reddit.com/r/SWN/comments/av868q/random_generator/ehdm603/). All SWN content is owned by [Kevin Crawford, Sine Nominee Publishing](https://sinenominepublishing.com/).
+Made with [permission from Kevin Crawford himself](https://old.reddit.com/r/SWN/comments/av868q/random_generator/ehdm603/). All SWN content is owned by [Kevin Crawford, Sine Nominee Publishing](https://sinenominepublishing.com/).
