@@ -18,10 +18,25 @@ roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_cl
                  [sg.Multiline("Rolls and total", size=(80,5), key = "_ROLLSOUTPUT_", do_not_clear=True)],
                  [sg.Button("Roll"), sg.Button('Exit'), sg.Text("Limit of 20 dice and 10,000 sides.")]]
 
+beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "Small Pack Hunter", "Large Pack Hunter", "Large Aggresive Prey Animal", "Lesser Lone Predator", "Greater Lone Predator", "Terrifying Apex Predator", "Gengineered Murder Beast"), auto_size_text=True, key='_BEASTINFOINPUT_', readonly=True, change_submits=True)],
+                    [sg.Multiline('Beast info', size=(80,10), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
+                    [sg.Button('Exit')]]
+
 layout = [[sg.Column(generator_column), sg.Column(roller_column)],
           [sg.Column(weapon_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
+
+def beastinfo(beast):
+    beasts = {"Small Vicious Beast":"HD: 1 HP\nAC: 14\nAtk.: +1\nDmg.: 1d2\nMove: 10m\nML: 7\nSkills: +1\nSaves: 15+",
+              "Small Pack Hunter":"HD: 1\nAC: 13\nAtk.: +1\nDmg.: 1d4\nMove: 15m\nML: 8\nSkills: +1\nSaves: 15+",
+              "Large Pack Hunter":"HD: 2\nAC: 14\nAtk.: +2\nDmg.: 1d6\nMove: 15m\nML: 9\nSkills: +1\nSaves: 14+",
+              "Large Aggresive Prey Animal":"HD: 5\nAC: 13\nAtk.: +4\nDmg.: 1d10\nMove: 15m\nML: 8\nSkills: +1\nSaves: 12+",
+              "Lesser Lone Predator":"HD: 3\nAC: 14\nAtk.: +4x2\nDmg.: 1d8 each\nMove: 15m\nML: 8\nSkills: +2\nSaves: 14+",
+              "Greater Lone Predator":"HD: 5\nAC: 15\nAtk.: +6x2\nDmg.: 1d10 each\nMove: 10m\nML: 9\nSkills: +2\nSaves: 12+",
+              "Terrifying Apex Predator":"HD: 8\nAC: 16\nAtk.: +8x2\nDmg.: 1d10 each\nMove: 20m\nML: 9\nSkills: +2\nSaves: 11+",
+              "Gengineered Murder Beast":"HD: 10\nAC: 18\nAtk.: +10x4\nDmg.: 1d10 each\nMove: 20m\nML: 11\nSkills: +3\nSaves: 10+"}
+    output = f"{beast}\n{beasts[beast]}"
 
 def beaststylegen():
     featurelist = ['Amphibian:  froggish or newtlike',
@@ -837,6 +852,9 @@ while True:
     if event == '_WEAPONIN_':
         output = weapongen(values['_WEAPONIN_'])
         window.FindElement('_WEAPONOUTPUT_').Update(output)
+    if event == '_BEASTINFOINPUT_':
+        output = beastinfogen(values['_BEASTINFOINPUT_'])
+        window.FindElement('_BEASTINFOOUTPUT_').Update(output)
     if event == "Roll" and values["_ROLLSINPUT_"] and values["_SIDESINPUT_"]:
         try:
             rolloutput = roller(values["_ROLLSINPUT_"], values["_SIDESINPUT_"])
