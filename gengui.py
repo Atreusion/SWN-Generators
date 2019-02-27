@@ -22,12 +22,39 @@ beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "S
                     [sg.Multiline('Beast info', size=(80,10), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
                     [sg.Button('Exit')]]
 
+npcinfo_column = [[sg.Text('NPC:'), sg.InputCombo(("Peaceful Human","Martial Human","Veteran Fighter","Elite Fighter","Heroic Fighter","Barbarian Hero","Barbarian Tribal","Gang Boss","Gang Member","Gengineered Killer","Legendary Fighter","Military Elite","Military Soldier","Normal Human","Pirate King","Police Officer","Serial Killer","Skilled Professional","Warrior Tyrant"), auto_size_text=True, key='_NPCINFOINPUT_', readonly=True, change_submits=True)],
+                    [sg.Multiline('NPC info', size=(80,10), key='_NPCINFOOUTPUT_', do_not_clear=True)],
+                    [sg.Button('Exit')]]
+
 layout = [[sg.Column(generator_column), sg.Column(roller_column)],
-          [sg.Column(weapon_column)], sg.Column(beastinfo_column)]]
+          [sg.Column(weapon_column)],
+          [sg.Column(beastinfo_column), sg.Column(npcinfo_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
 
-def beastinfo(beast):
+def npcinfogen(npc):
+    npcs = {"Peaceful Human":"HD: 1\nAC: 10\nAtk: +0\nDmg.: Unarmed\nMove: 10m\nML: 6\nSkills: +1\nSaves: 15+",
+            "Martial Human":"HD: 1\nAC: 10\nAtk: +1\nDmg.: By weapon\nMove: 10m\nML: 8\nSkills: +1\nSaves: 15+",
+            "Veteran Fighter":"HD: 2\nAC: 14\nAtk: +2\nDmg.: By weapon +1\nMove: 10m\nML: 9\nSkills: +1\nSaves: 14+",
+            "Elite Fighter":"HD: 3\nAC: 16 (combat)\nAtk: +4\nDmg.: By weapon +1\nMove: 10m\nML: 10\nSkills: +2\nSaves: 14+",
+            "Heroic Fighter":"HD: 6\nAC: 16 (combat)\nAtk: +8\nDmg.: By weapon +3\nMove: 10m\nML: 11\nSkills: +3\nSaves: 12+",
+            "Barbarian Hero":"HD: 6\nAC: 16 (primitive)\nAtk: +8\nDmg.: By weapon +3\nMove: 10m\nML: 11\nSkills: +3\nSaves: 12+",
+            "Barbarian Tribal":"HD: 1\nAC: 12 (primitive)\nAtk: +2\nDmg.: By weapon\nMove: 10m\nML: 8\nSkills: +1\nSaves: 15+",
+            "Gang Boss":"HD: 3\nAC: 14\nAtk: +4\nDmg.: By weapon +1\nMove: 10m\nML: 9\nSkills: +2\nSaves: 14+",
+            "Gang Member":"HD: 1\nAC: 12\nAtk: +1\nDmg.: By weapon\nMove: 10m\nML: 7\nSkills: +1\nSaves: 15+",
+            "Gengineered Killer":"HD: 4\nAC: 16\nAtk: +5\nDmg.: By weapon +1\nMove: 15m\nML: 10\nSkills: +2\nSaves: 13+",
+            "Legendary Fighter":"HD: 10\nAC: 20 (powered)\nAtk: +12x2\nDmg.: By weapon +4\nMove: 10m\nML: 12\nSkills: +5\nSaves: 10+",
+            "Military Elite":"HD: 3\nAC: 16 (combat)\nAtk: +4\nDmg.: By weapon +1\nMove: 10m\nML: 10\nSkills: +2\nSaves: 14+",
+            "Military Soldier":"HD: 1\nAC: 16 (combat)\nAtk: +1\nDmg.: By weapon\nMove: 10m\nML: 9\nSkills: +1\nSaves: 15+",
+            "Normal Human":"HD: 1\nAC: 10\nAtk: +0\nDmg.: Unarmed\nMove: 10m\nML: 6\nSkills: +1\nSaves: 15+",
+            "Pirate King":"HD: 7\nAC: 18 (powered)\nAtk: +9\nDmg.: By weapon +2\nMove: 10m\nML: 11\nSkills: +3\nSaves: 12+",
+            "Police Officer":"HD: 1\nAC: 14\nAtk: +1\nDmg.: By weapon\nMove: 10m\nML: 8\nSkills: +1\nSaves: 15+",
+            "Serial Killer":"HD: 6\nAC: 12\nAtk: +8\nDmg.: By weapon +3\nMove: 10m\nML: 12\nSkills: +3\nSaves: 12+",
+            "Skilled Professional":"HD: 1\nAC: 10\nAtk: +0\nDmg.: By weapon\nMove: 10m\nML: 6\nSkills: +2\nSaves: 15+",
+            "Warrior Tyrant":"HD: 8\nAC: 20 (powered)\nAtk: +10\nDmg.: By weapon +3\nMove: 10m\nML: 11\nSkills: +3\nSaves: 11+"}
+    output = f"{npc}\n{npcs[npc]}"
+
+def beastinfogen(beast):
     beasts = {"Small Vicious Beast":"HD: 1 HP\nAC: 14\nAtk.: +1\nDmg.: 1d2\nMove: 10m\nML: 7\nSkills: +1\nSaves: 15+",
               "Small Pack Hunter":"HD: 1\nAC: 13\nAtk.: +1\nDmg.: 1d4\nMove: 15m\nML: 8\nSkills: +1\nSaves: 15+",
               "Large Pack Hunter":"HD: 2\nAC: 14\nAtk.: +2\nDmg.: 1d6\nMove: 15m\nML: 9\nSkills: +1\nSaves: 14+",
@@ -855,6 +882,9 @@ while True:
     if event == '_BEASTINFOINPUT_':
         output = beastinfogen(values['_BEASTINFOINPUT_'])
         window.FindElement('_BEASTINFOOUTPUT_').Update(output)
+    if event == '_NPCINFOINPUT_':
+        output = npcinfogen(values['_NPCINFOINPUT_'])
+        window.FindElement('_NPCINFOOUTPUT_').Update(output)
     if event == "Roll" and values["_ROLLSINPUT_"] and values["_SIDESINPUT_"]:
         try:
             rolloutput = roller(values["_ROLLSINPUT_"], values["_SIDESINPUT_"])
