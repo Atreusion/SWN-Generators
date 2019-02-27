@@ -5,8 +5,8 @@ if sys.version_info[0] >= 3:
 else:
     import PySimpleGUI27 as sg
   
-generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron'), auto_size_text=True, key='_GENIN_', readonly=True)],
-                    [sg.Multiline('Generator info', size=(80,10), key='_GENOUTPUT_', do_not_clear=True)],
+generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast'), auto_size_text=True, key='_GENIN_', readonly=True)],
+                    [sg.Multiline('Generator info', size=(80,13), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate'), sg.Button('Exit')]]
 
 weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
@@ -22,6 +22,101 @@ layout = [[sg.Column(generator_column), sg.Column(roller_column)],
           [sg.Column(weapon_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
+
+def beastgen():
+    featurelist = ['Amphibian:  froggish or newtlike',
+                   'Bird:  winged and feathered',
+                   'Fish:  scaled and torpedo-bodied',
+                   'Insect:  beetle-like or fly-winged',
+                   'Mammal:  hairy and fanged',
+                   'Reptile:  lizardlike and long-bodied',
+                   'Spider:  many-legged and fat',
+                   'Exotic:  made of wholly alien elements']
+    if random.random() > 0.8:
+        choice_one = random.choice(featurelist)
+        featurelist.remove(choice_one)
+        choice_two = random.choice(featurelist)
+        features = f"Features: {choice_one} and {choice_two}"
+    else:
+        features = f"Feature: {random.choice(featurelist)}"
+    bodylist = ["Humanoid", "Quadruped", "Many-legged", "Bulbous", "Amorphous"]
+    if random.random() > 0.8333:
+        choice_one = random.choice(bodylist)
+        bodylist.remove(choice_one)
+        choice_two = random.choice(bodylist)
+        body = f"Body: {choice_one} and {choice_two}"
+    else:
+        body = f"Body: {random.choice(bodylist)}"
+    limbs = random.choice(["Wings", "Many joints", "Tentacles", "Opposable thumbs", "Retractable", "Varying Size"])
+    skin = random.choice(["Hard shell", "Exoskeleton", "Odd texture", "Molts regularly", "Harmful to touch", "Wet or slimy"])
+    weapon = random.choice(["Teeth or mandibles", "Claws", "Poison", "Harmful discharge", "Pincers", "Horns"])
+    size = random.choice(["Cat-sized", "Wolf-sized", "Calf-sized", "Bull-sized", "Hippo-sized", "Elephant-sized"])
+    predator = random.choice(["Hunts in kin-group packs",
+                              "Favors ambush attacks",
+                              "Cripples prey and waits for death",
+                              "Pack supports alpha-beast attack",
+                              "Lures or drives prey into danger",
+                              "Hunts as a lone, powerful hunter",
+                              "Only is predator at certain times",
+                              "Mindlessly attacks humans"])
+    prey = random.choice(["Moves in vigilant herds",
+                          "Exists in small family groups",
+                          "They all team up on a single foe",
+                          "They go berserk when near death",
+                          "They’re violent in certain seasons",
+                          "They’re vicious if threatened",
+                          "Symbiotic creature protects them",
+                          "Breeds at tremendous rates"])
+    scavenger = random.choice(["Never attacks unwounded prey",
+                               "Uses other beasts as harriers",
+                               "Always flees if significantly hurt",
+                               "Poisons prey, waits for it to die",
+                               "Disguises itself as its prey",
+                               "Remarkably stealthy",
+                               "Summons predators to weak prey",
+                               "Steals prey from weaker predator"])
+    discharge = random.choice(["Acidic spew doing its damage on a hit",
+                               "Toxic spittle or cloud, use adjacent chart",
+                               "Super-heated or super-chilled spew",
+                               "Sonic drill or other disabling noise",
+                               "Natural laser or plasma discharge",
+                               "Nauseating stench or disabling chemical",
+                               "Equipment-melting corrosive",
+                               "Explosive pellets or chemical catalysts"])
+    poison = random.choice(["Death",
+                            "Paralysis",
+                            "1d4 dmg per onset interval",
+                            "Convulsions",
+                            "Blindness",
+                            "Hallucinations"])
+    onset = random.choice(["Instant",
+                           "1 round",
+                           "1d6 rounds",
+                           "1 minute",
+                           "1d6 minutes",
+                           "1 hour"])
+    duration = random.choice(["1d6 rounds",
+                              "1 minute",
+                              "10 minutes",
+                              "1 hour",
+                              "1d6 hours",
+                              "1d6 days"])
+    output = (f"{features}\n"
+              f"{body}\n"
+              f"Limbs: {limbs}\n"
+              f"Skin: {skin}\n"
+              f"Weapon: {weapon}\n"
+              f"Size: {size}\n"
+              f"Predator trait: {predator}\n"
+              f"Prey trait: {prey}\n"
+              f"Scavenger trait: {scavenger}\n"
+              f"Discharges: {discharge}\n"
+              f"Poison: {poison}\n"
+              f"Onset: {onset}\n"
+              f"Duration: {duration}")
+    output = output.replace("1d4", str(random.randint(1,4)))
+    output = output.replace("1d6", str(random.randint(1,6)))
+    return output
 
 def onerollnpcgen():
     age = random.choice(["Age: Unusually young or old for their role",
@@ -735,6 +830,9 @@ while True:
         window.FindElement('_GENOUTPUT_').Update(output)
     if event == 'Generate' and values['_GENIN_'] == 'One-roll Patron':
         output = onerollpatrongen()
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Generate' and values['_GENIN_'] == 'Beast':
+        output = beastgen()
         window.FindElement('_GENOUTPUT_').Update(output)
     if event == '_WEAPONIN_':
         output = weapongen(values['_WEAPONIN_'])
