@@ -1,7 +1,7 @@
 # SWN Generators
 A small set of generators for Stars Without Number Revised Edition. 12/29/2017 Edition.
 
-This should be cross-platform, but I have yet to test it on anything other than Windows. I will hopefully be able to include a standalone .exe, as the installation procedure as it stands leaves a lot to be desired as an end user.
+This should be cross-platform, but I have yet to test it on anything other than Windows. I have included a standalone .exe, as the installation procedure as it stands leaves a lot to be desired as an end user.
 
 ## Installation
 
@@ -33,4 +33,4 @@ Running the generator is fairly straightforward from here. Download [the file](h
 
 ## Permission
 
-Lovingly made with [permission from Kevin Crawford himself](https://old.reddit.com/r/SWN/comments/av868q/random_generator/ehdm603/).
+Lovingly made with [permission from Kevin Crawford himself](https://old.reddit.com/r/SWN/comments/av868q/random_generator/ehdm603/). All SWN content is owned by [Kevin Crawford, Sine Nominee Publishing](https://sinenominepublishing.com/).
