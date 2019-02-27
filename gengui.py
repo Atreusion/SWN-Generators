@@ -1,9 +1,5 @@
-import sys
 import random
-if sys.version_info[0] >= 3:
-    import PySimpleGUI as sg
-else:
-    import PySimpleGUI27 as sg
+import PySimpleGUI as sg
   
 generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
                     [sg.Multiline('Generator info', size=(80,13), key='_GENOUTPUT_', do_not_clear=True)],
