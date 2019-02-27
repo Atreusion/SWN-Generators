@@ -7,7 +7,7 @@ This should be cross-platform, but I have yet to test it on anything other than 
 
 To install, you first need to install [Python 3.6+](https://www.python.org/downloads/). Download an install whichever version your computer needs. Linux users should have it pre-installed, but ```python3``` might not be up-to-date.
 
-Second, you need to install PySimpleGUI:
+Second, you need to install [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI):
 
 ```pip install --upgrade PySimpleGUI```
 
@@ -17,11 +17,11 @@ or
 
 That should be run from command line. Windows users may need to preface the command with ```py -m```, assuming you selected that option during installation:
 
-```py -m pip install --pgrade PySimpleGUI```
+```py -m pip install --upgrade PySimpleGUI```
 
 If ```py``` does not work, then you'll need to find where Python was installed and run the command there:
 
-```python -m pip install --pgrade PySimpleGUI```
+```python -m pip install --upgrade PySimpleGUI```
 
 Windows users may also need to run the command prompt as administrator (right clicking the Command Prompt and selecting Run as administrator).
 
