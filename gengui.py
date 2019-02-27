@@ -5,7 +5,7 @@ if sys.version_info[0] >= 3:
 else:
     import PySimpleGUI27 as sg
   
-generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness'), size=(20, 1), key='_GENIN_')],
+generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron'), size=(20, 1), key='_GENIN_')],
                     [sg.Multiline('Generator info', size=(80,10), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate'), sg.Button('Exit')]]
 
@@ -23,6 +23,134 @@ layout = [[sg.Column(generator_column), sg.Column(roller_column)],
           [sg.Column(weapon_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
+
+def onerollnpcgen():
+    age = random.choice(["Age: Unusually young or old for their role",
+                         "Age: Young adult",
+                         "Age: Mature prime",
+                         "Age: Middle-aged or elderly"])
+    background = random.choice(["Background: The local underclass or poorest natives",
+                                "Background: Common laborers or cube workers",
+                                "Background: Aspiring bourgeoise or upper clas",
+                                "Background: The elite of this society",
+                                "Background: Minority or foreigners",
+                                "Background: Offworlders or exotics"])
+    role = random.choice(["Role in society: Criminal, thug, thief, swindler",
+                          "Role in society: Menial, cleaner, retail worker, servant",
+                          "Role in society: Unskilled heavy labor, porter, construction",
+                          "Role in society: Skilled trade, electrician, mechanic, pilot",
+                          "Role in society: Idea worker, programmer, writer",
+                          "Role in society: Merchant, business owner, trader, banker",
+                          "Role in society: Official, bureaucrat, courtier, clerk",
+                          "Role in society: Military, soldier, enforcer, law office"])
+    desire = random.choice(["Greatest desire: They want a particular romantic partner",
+                            "Greatest desire: They want money for them or a loved one",
+                            "Greatest desire: They want a promotion in their job",
+                            "Greatest desire: They want answers about a past trauma",
+                            "Greatest desire: They want revenge on an enemy",
+                            "Greatest desire: They want to help a beleaguered friend",
+                            "Greatest desire: They want an entirely different job",
+                            "Greatest desire: They want protection from an enemy",
+                            "Greatest desire: They want to leave their current life",
+                            "Greatest desire: They want fame and glory",
+                            "Greatest desire: They want power over those around them",
+                            "Greatest desire: They have everything they want from life"])
+    problem = random.choice(["Biggest Problem: They have significant debt or money woes",
+                             "Biggest Problem: A loved one is in trouble; reroll for it",
+                             "Biggest Problem: Romantic failure with a desired person",
+                             "Biggest Problem: Drug or behavioral addiction",
+                             "Biggest Problem: Their superior dislikes or resents them",
+                             "Biggest Problem: They have a persistent sickness",
+                             "Biggest Problem: They hate their job or life situation",
+                             "Biggest Problem: Someone dangerous is targeting them",
+                             "Biggest Problem: They’re pursuing a disastrous purpose",
+                             "Biggest Problem: They have no problems worth mentioning"])
+    trait = random.choice(["Most obvious character trait: Ambition",
+                           "Most obvious character trait: Avarice",
+                           "Most obvious character trait: Bitterness",
+                           "Most obvious character trait: Courage",
+                           "Most obvious character trait: Cowardice",
+                           "Most obvious character trait: Curiosity",
+                           "Most obvious character trait: Deceitfulness",
+                           "Most obvious character trait: Determination",
+                           "Most obvious character trait: Devotion to a cause",
+                           "Most obvious character trait: Filiality",
+                           "Most obvious character trait: Hatred",
+                           "Most obvious character trait: Honesty",
+                           "Most obvious character trait: Hopefulness",
+                           "Most obvious character trait: Love of a person",
+                           "Most obvious character trait: Nihilism",
+                           "Most obvious character trait: Paternalism",
+                           "Most obvious character trait: Pessimism",
+                           "Most obvious character trait: Protectiveness",
+                           "Most obvious character trait: Resentment",
+                           "Most obvious character trait: Shame"])
+    output = f"{age}\n{background}\n{role}\n{desire}\n{problem}\n{trait}"
+    return output
+
+def onerollpatrongen():
+    eagerness = random.choice(["Eagerness to hire: Cautious, but can be convinced to hire",
+                               "Eagerness to hire: Willing to promise standard rates",
+                               "Eagerness to hire: Eager, willing to offer a bonus",
+                               "Eagerness to hire: Desperate, might offer what they can’t pay"])
+    trustworthiness = random.choice(["Trustworthiness: They intend to totally screw the PCs",
+                                     "Trustworthiness: They won’t pay unless forced to do so",
+                                     "Trustworthiness: They’ll pay slowly or reluctantly",
+                                     "Trustworthiness: They’ll pay, but discount for mistakes",
+                                     "Trustworthiness: They’ll pay without quibbling",
+                                     "Trustworthiness: They’ll pay more than they promised"])
+    noncash = random.choice(["Non-cash rewards: Government official favors owed",
+                             "Non-cash rewards: Property in the area",
+                             "Non-cash rewards: An item very valuable on another world",
+                             "Non-cash rewards: Pretech mod components",
+                             "Non-cash rewards: Useful pretech artifact",
+                             "Non-cash rewards: Information the PCs need",
+                             "Non-cash rewards: Membership in a powerful group",
+                             "Non-cash rewards: Black market access",
+                             "Non-cash rewards: Use of restricted facilities or shipyards",
+                             "Non-cash rewards: Shares in a profitable business",
+                             "Non-cash rewards: Maps to a hidden or guarded treasure",
+                             "Non-cash rewards: Illegal but valuable weapons or gear"])
+    challenge = random.choice(["Challenge: Kill somebody who might deserve it",
+                               "Challenge: Kidnap someone dangerous",
+                               "Challenge: Steal a well-guarded object",
+                               "Challenge: Arson or sabotage on a place",
+                               "Challenge: Get proof of some misdeed",
+                               "Challenge: Protect someone from an immediate threat",
+                               "Challenge: Transport someone through danger",
+                               "Challenge: Guard an object being transported"])
+    counter = random.choice(["Counterforce: A treacherous employer or subordinate",
+                             "Counterforce: An open and known enemy of the patron",
+                             "Counterforce: Official governmental meddling",
+                             "Counterforce: An unknown rival of the patron",
+                             "Counterforce: The macguffin itself opposes them",
+                             "Counterforce: Very short time frame allowed",
+                             "Counterforce: The job is spectacularly illegal",
+                             "Counterforce: A participant would profit by their failure",
+                             "Counterforce: The patron is badly wrong about a thing",
+                             "Counterforce: The locals are against the patron"])
+    complication = random.choice(["Complication: An ambush is laid somewhere",
+                                  "Complication: PC involvement is leaked to the enemy",
+                                  "Complication: The patron gives faulty aid somehow",
+                                  "Complication: Failing would be extremely unhealthy",
+                                  "Complication: The job IDs them as allies of a local faction",
+                                  "Complication: The macguffin is physically dangerous",
+                                  "Complication: An important location is hard to get into",
+                                  "Complication: Succeeding would be morally distasteful",
+                                  "Complication: A supposed ally is very unhelpful or stupid",
+                                  "Complication: The patron badly misunderstood the PCs",
+                                  "Complication: The job changes suddenly partway through",
+                                  "Complication: An unexpected troublemaker is involved",
+                                  "Complication: Critical gear will fail partway through",
+                                  "Complication: An unrelated accident complicates things",
+                                  "Complication: Payment comes in a hard-to-handle form",
+                                  "Complication: Someone is turning traitor on the patron",
+                                  "Complication: A critical element has suddenly moved",
+                                  "Complication: Payment is in avidly-pursued hot goods",
+                                  "Complication: The true goal is a subsidiary part of the job",
+                                  "Complication: No complications; it’s just as it seems to be"])
+    output = f"{eagerness}\n{trustworthiness}\n{noncash}\n{challenge}\n{counter}\n{complication}"
+    return output
 
 def roller(rolls, sides):
     rolls = int(rolls)
@@ -600,6 +728,12 @@ while True:
         window.FindElement('_GENOUTPUT_').Update(output)
     if event == 'Generate' and values['_GENIN_'] == 'Wilderness':
         output = wildernessgen()
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Generate' and values['_GENIN_'] == 'One-roll NPC':
+        output = onerollnpcgen()
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Generate' and values['_GENIN_'] == 'One-roll Patron':
+        output = onerollpatrongen()
         window.FindElement('_GENOUTPUT_').Update(output)
     if event == 'Weapon Info':
         output = weapongen(values['_WEAPONIN_'])
