@@ -10,7 +10,7 @@ weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced 
                  [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")],
                  [sg.Button('Exit')]]
 
-roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (3, 1), do_not_clear=True, key = "_SIDESINPUT_")],
+roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (5, 1), do_not_clear=True, key = "_SIDESINPUT_")],
                  [sg.Multiline("Rolls and total", size=(80,5), key = "_ROLLSOUTPUT_", do_not_clear=True)],
                  [sg.Button("Roll"), sg.Button('Exit'), sg.Text("Limit of 20 dice and 10,000 sides.")]]
 
@@ -26,7 +26,7 @@ layout = [[sg.Column(generator_column), sg.Column(roller_column)],
           [sg.Column(weapon_column)],
           [sg.Column(beastinfo_column), sg.Column(npcinfo_column)]]
   
-window = sg.Window('SWN Generator').Layout(layout)
+window = sg.Window('SWN Generator', background_color="white").Layout(layout)
 
 def npcinfogen(npc):
     npcs = {"Peaceful Human":"HD: 1\nAC: 10\nAtk: +0\nDmg.: Unarmed\nMove: 10m\nML: 6\nSkills: +1\nSaves: 15+",
@@ -64,14 +64,14 @@ def beastinfogen(beast):
     return output
 
 def beaststylegen():
-    featurelist = ['Amphibian:  froggish or newtlike',
-                   'Bird:  winged and feathered',
-                   'Fish:  scaled and torpedo-bodied',
-                   'Insect:  beetle-like or fly-winged',
-                   'Mammal:  hairy and fanged',
-                   'Reptile:  lizardlike and long-bodied',
-                   'Spider:  many-legged and fat',
-                   'Exotic:  made of wholly alien elements']
+    featurelist = ['Amphibian: froggish or newtlike',
+                   'Bird: winged and feathered',
+                   'Fish: scaled and torpedo-bodied',
+                   'Insect: beetle-like or fly-winged',
+                   'Mammal: hairy and fanged',
+                   'Reptile: lizardlike and long-bodied',
+                   'Spider: many-legged and fat',
+                   'Exotic: made of wholly alien elements']
     if random.random() > 0.8:
         choice_one = random.choice(featurelist)
         featurelist.remove(choice_one)
