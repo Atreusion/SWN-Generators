@@ -1,32 +1,32 @@
 import random
 import PySimpleGUI as sg
   
-generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
+generator_column = [[sg.Text('Choose generator:', background_color="#D5D5D5"), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
                     [sg.Multiline('Generator info', size=(80,13), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate'), sg.Button('Exit')]]
 
-weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
-                 [sg.Multiline('Weapon info', size=(80,10), key='_WEAPONOUTPUT_', do_not_clear=True)],
-                 [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")],
+weapon_column = [[sg.Text('Weapon:', background_color="#D5D5D5"), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
+                 [sg.Multiline('Weapon info', size=(80,7), key='_WEAPONOUTPUT_', do_not_clear=True)],
+                 [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.", background_color="#D5D5D5")],
                  [sg.Button('Exit')]]
 
-roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (5, 1), do_not_clear=True, key = "_SIDESINPUT_")],
+roller_column = [[sg.Text('Dice Roller:', background_color="#D5D5D5"), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d", background_color="#D5D5D5"), sg.InputText(size = (5, 1), do_not_clear=True, key = "_SIDESINPUT_")],
                  [sg.Multiline("Rolls and total", size=(80,5), key = "_ROLLSOUTPUT_", do_not_clear=True)],
-                 [sg.Button("Roll"), sg.Button('Exit'), sg.Text("Limit of 20 dice and 10,000 sides.")]]
+                 [sg.Button("Roll"), sg.Button('Exit'), sg.Text("Limit of 20 dice and 10,000 sides.", background_color="#D5D5D5")]]
 
-beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "Small Pack Hunter", "Large Pack Hunter", "Large Aggresive Prey Animal", "Lesser Lone Predator", "Greater Lone Predator", "Terrifying Apex Predator", "Gengineered Murder Beast"), auto_size_text=True, key='_BEASTINFOINPUT_', readonly=True, change_submits=True)],
-                    [sg.Multiline('Beast info', size=(80,10), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
+beastinfo_column = [[sg.Text('Beast:', background_color="#D5D5D5"), sg.InputCombo(("Small Vicious Beast", "Small Pack Hunter", "Large Pack Hunter", "Large Aggresive Prey Animal", "Lesser Lone Predator", "Greater Lone Predator", "Terrifying Apex Predator", "Gengineered Murder Beast"), auto_size_text=True, key='_BEASTINFOINPUT_', readonly=True, change_submits=True)],
+                    [sg.Multiline('Beast info', size=(80,8), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
                     [sg.Button('Exit')]]
 
-npcinfo_column = [[sg.Text('NPC:'), sg.InputCombo(("Peaceful Human","Martial Human","Veteran Fighter","Elite Fighter","Heroic Fighter","Barbarian Hero","Barbarian Tribal","Gang Boss","Gang Member","Gengineered Killer","Legendary Fighter","Military Elite","Military Soldier","Normal Human","Pirate King","Police Officer","Serial Killer","Skilled Professional","Warrior Tyrant"), auto_size_text=True, key='_NPCINFOINPUT_', readonly=True, change_submits=True)],
-                    [sg.Multiline('NPC info', size=(80,10), key='_NPCINFOOUTPUT_', do_not_clear=True)],
+npcinfo_column = [[sg.Text('NPC:', background_color="#D5D5D5"), sg.InputCombo(("Peaceful Human","Martial Human","Veteran Fighter","Elite Fighter","Heroic Fighter","Barbarian Hero","Barbarian Tribal","Gang Boss","Gang Member","Gengineered Killer","Legendary Fighter","Military Elite","Military Soldier","Normal Human","Pirate King","Police Officer","Serial Killer","Skilled Professional","Warrior Tyrant"), auto_size_text=True, key='_NPCINFOINPUT_', readonly=True, change_submits=True)],
+                    [sg.Multiline('NPC info', size=(80,8), key='_NPCINFOOUTPUT_', do_not_clear=True)],
                     [sg.Button('Exit')]]
 
-layout = [[sg.Column(generator_column), sg.Column(roller_column)],
-          [sg.Column(weapon_column)],
-          [sg.Column(beastinfo_column), sg.Column(npcinfo_column)]]
+layout = [[sg.Column(generator_column, background_color="#D5D5D5"), sg.Column(roller_column, background_color="#D5D5D5")],
+          [sg.Column(weapon_column, background_color="#D5D5D5")],
+          [sg.Column(beastinfo_column, background_color="#D5D5D5"), sg.Column(npcinfo_column, background_color="#D5D5D5")]]
   
-window = sg.Window('SWN Generator', background_color="white").Layout(layout)
+window = sg.Window('SWN Generator', background_color="#9099A2", button_color=("#FFFFFF", "#6D7993")).Layout(layout)
 
 def npcinfogen(npc):
     npcs = {"Peaceful Human":"HD: 1\nAC: 10\nAtk: +0\nDmg.: Unarmed\nMove: 10m\nML: 6\nSkills: +1\nSaves: 15+",
@@ -48,7 +48,7 @@ def npcinfogen(npc):
             "Serial Killer":"HD: 6\nAC: 12\nAtk: +8\nDmg.: By weapon +3\nMove: 10m\nML: 12\nSkills: +3\nSaves: 12+",
             "Skilled Professional":"HD: 1\nAC: 10\nAtk: +0\nDmg.: By weapon\nMove: 10m\nML: 6\nSkills: +2\nSaves: 15+",
             "Warrior Tyrant":"HD: 8\nAC: 20 (powered)\nAtk: +10\nDmg.: By weapon +3\nMove: 10m\nML: 11\nSkills: +3\nSaves: 11+"}
-    output = f"{npc}\n{npcs[npc]}"
+    output = npcs[npc]
     return output
 
 def beastinfogen(beast):
@@ -60,7 +60,7 @@ def beastinfogen(beast):
               "Greater Lone Predator":"HD: 5\nAC: 15\nAtk.: +6x2\nDmg.: 1d10 each\nMove: 10m\nML: 9\nSkills: +2\nSaves: 12+",
               "Terrifying Apex Predator":"HD: 8\nAC: 16\nAtk.: +8x2\nDmg.: 1d10 each\nMove: 20m\nML: 9\nSkills: +2\nSaves: 11+",
               "Gengineered Murder Beast":"HD: 10\nAC: 18\nAtk.: +10x4\nDmg.: 1d10 each\nMove: 20m\nML: 11\nSkills: +3\nSaves: 10+"}
-    output = f"{beast}\n{beasts[beast]}"
+    output = beasts[beast]
     return output
 
 def beaststylegen():
