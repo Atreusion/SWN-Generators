@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 
 sg.SetOptions(text_element_background_color='#D5D5D5', button_color=("#FFFFFF", "#6D7993"), background_color="#9099A2")
   
-generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
+generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Place', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
                     [sg.Multiline('Generator info', size=(80,14), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate')]]
 
@@ -36,6 +36,68 @@ def get_reaction():
     elif 0.722222 < reaction_roll < 0.972222: reaction = "Positive, potentially cooperative with PCs"
     else: reaction = "Friendly, helpful as is plausible to be"
     return reaction
+
+def placegen():
+    reward = ["Large cache of credits",
+              "Precious cultural artifact",
+              "Vital data on the party’s goal",
+              "Missing or kidnapped",
+              "Advanced pretech artifact",
+              "Key to some guarded location",
+              "Ancient treasure object",
+              "Recently-stolen goods",
+              "High-tech robotic servitor",
+              "Token item of ruling legitimacy",
+              "Juicy blackmail material",
+              "History-rewriting evidence",
+              "Alien artifact of great power",
+              "Precious megacorp data files",
+              "Map to some valuable thing",
+              "Forbidden but precious drug",
+              "Legal title to important land",
+              "Awful secret of local government",
+              "Cache of precious goods",
+              "Stock of valuable weaponry"]
+    civilized = ["Local festival going on",
+                 "Angry street protests",
+                 "Minor fire or other disorder",
+                 "VIP Merchants and peddlers active",
+                 "Tourists from another country",
+                 "Building repair or maintenance",
+                 "Recent vehicle crash",
+                 "Public art performance",
+                 "Angry traffic jam",
+                 "Missionaries for a local religion",
+                 "Loud advertising campaign",
+                 "Memorial service ongoing",
+                 "Road work halting traffic",
+                 "Power outage in the area",
+                 "Police chasing criminals",
+                 "Annoying drunks being loud",
+                 "Beggars seeking alms",
+                 "Constructing a new building",
+                 "Local thugs swaggering around",
+                 "Aerial light display"]
+    wilderness = ["Bandits have moved in",
+                  "Flooding swept through",
+                  "Part of it has collapsed",
+                  "Refugees are hiding here",
+                  "Dangerous animals lair here",
+                  "A rebel cell uses it for a base",
+                  "Smugglers have landed here",
+                  "Foreign agents meet here",
+                  "A hermit has taken up residence",
+                  "A toxic plant is growing wild",
+                  "An artist seeks inspiration here",
+                  "An ancient structure was dug out",
+                  "The weather has turned savage",
+                  "A vehicle crashed nearby",
+                  "Some locals are badly lost",
+                  "Religious pilgrims come here",
+                  "Locals fight over control of it",
+                  "Nature threatens to wipe it out",
+                  "An old shrine was raised here",
+                  "A shell of a building remains"]
 
 def npcinfogen(npc):
     npcs = {"Peaceful Human":"HD: 1\nAC: 10\nAtk: +0\nDmg.: Unarmed\nMove: 10m\nML: 6\nSkills: +1\nSaves: 15+",
