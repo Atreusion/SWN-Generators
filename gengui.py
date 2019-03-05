@@ -98,7 +98,118 @@ def placegen():
                   "Nature threatens to wipe it out",
                   "An old shrine was raised here",
                   "A shell of a building remains"]
-
+    social_example = ["An explosively temperamental VIP",
+                      "An unknown but critical social taboo",
+                      "A case of mistaken identity",
+                      "An expectation for specific PC action",
+                      "A frame job hung on the PCs"]
+    social_danger = ["An allied NPC breaks ties",
+                     "An enemy is alerted to them",
+                     "A new enemy is made",
+                     "Cads think the PCs are allies",
+                     "An opportunity is lost"]
+    legal_example = ["A regulation unknown to the PCs",
+                     "A tax or confiscation",
+                     "Vital gear is prohibited here",
+                     "Lawsuit from an aggrieved NPC",
+                     "A state agent conscripts PC help"]
+    legal_danger = ["Substantial monetary fine",
+                    "Imprisonment for the party",
+                    "Confiscation of possessions",
+                    "Deportation from the place",
+                    "Loss of rights and protections"]
+    environmental_example = ["Heavy background radiation",
+                             "A planetary sickness foreigners get",
+                             "Strong or weak local gravity",
+                             "Gear-eating microbial life",
+                             "Unpredictable psychic power field"]
+    environmental_danger = ["Catch a lingering disease",
+                            "Suffer bodily harm",
+                            "Take a penalty on rolls",
+                            "Lose some equipment",
+                            "Psychic abilities are altered"]
+    trap_example = ["Alarm system attached to a trap",
+                    "Snare left for local animals",
+                    "Hermit’s self-defense measure",
+                    "Long-dead builder’s trapsmithing",
+                    "New occupant’s defensive trap"]
+    trap_danger = ["Something set on fire",
+                   "Guards are summoned",
+                   "Fall to a new area",
+                   "Equipment is damaged",
+                   "Subject is injured"]
+    animal_example = ["Dangerous local swarm vermin",
+                      "A big predator lair",
+                      "Pack hunters haunt the area",
+                      "Flying threats pounce here",
+                      "Monstrous beast sleeps or is torpid"]
+    animal_danger = ["They have a ranged attack",
+                     "They’re venomous",
+                     "Dangerously coordinated foe",
+                     "Killing them inflicts a fine",
+                     "Their deaths cause an effect"]
+    sentient_example = ["A group hostile to intruders",
+                        "Trickster thieves and con-men",
+                        "Hostile expert-system robots",
+                        "Secrecy-loving rebels or criminals",
+                        "Another area-clearing group"]
+    sentient_danger = ["Immediate combat",
+                       "Treacherous feigned friend",
+                       "Lead the PCs into a trap",
+                       "Demand payment or loot",
+                       "Activate other area defenses"]
+    decay_example = ["Crumbling floor or ceiling",
+                     "Waste or heating tubes rupture",
+                     "Dangerous standing liquid",
+                     "Maintenance robots gone haywire",
+                     "Power plant is unstable"]
+    decay_danger = ["Ruptures to release a peril",
+                    "Toxic or radioactive debris",
+                    "Explosive decompression",
+                    "Invisible or slow-acting toxin",
+                    "Fires or explosions"]
+    pc_example = ["Activating a system causes a disaster",
+                  "Catastrophic plan proposed by NPCs",
+                  "Removing loot triggers defenses",
+                  "Handling an object ruins it",
+                  "Leaving a thing open brings calamity"]
+    pc_danger = ["Horrible vermin are admitted",
+                 "Local system goes berserk",
+                 "Something ruptures violently",
+                 "Ancient defenses awaken",
+                 "The PC’s goal is imperiled"]
+    hazard_choice = random.randint(1, 8)
+    if hazard_choice = 1:
+        example = f"Social example: {social_example}"
+        danger = f"Social danger: {social_danger}"
+    elif hazard_choice = 2:
+        example = f"Legal example: {legal_example}"
+        danger = f"Legal danger: {legal_danger}"
+    elif hazard_choice = 3:
+        example = f"Environmental example: {environmental_example}"
+        danger = f"Environmental danger: {environmental_danger}"
+    elif hazard_choice = 4:
+        example = f"Trap example: {trap_example}"
+        danger = f"Trap danger: {trap_danger}"
+    elif hazard_choice = 5:
+        example = f"Animal example: {animal_example}"
+        danger = f"Animal danger: {animal_danger}"
+    elif hazard_choice = 6:
+        example = f"Sentient example: {sentient_example}"
+        danger = f"Sentient danger: {sentient_danger}"
+    elif hazard_choice = 7:
+        example = f"Decay example: {decay_example}"
+        danger = f"Decay danger: {decay_danger}"
+    elif hazard_choice = 8:
+        example = f"PC-induced example: {pc_example}"
+        danger = f"PC-induced danger: {pc_danger}"
+    output = (f"Reward: {reward}\n"
+              f"Civilized ongoings: {civilized}\n"
+              f"Wilderness ongoings: {wilderness}\n"
+              f"{example}\n"
+              f"{danger}")
+    return output
+        
 def npcinfogen(npc):
     npcs = {"Peaceful Human":"HD: 1\nAC: 10\nAtk: +0\nDmg.: Unarmed\nMove: 10m\nML: 6\nSkills: +1\nSaves: 15+",
             "Martial Human":"HD: 1\nAC: 10\nAtk: +1\nDmg.: By weapon\nMove: 10m\nML: 8\nSkills: +1\nSaves: 15+",
@@ -948,6 +1059,9 @@ while True:
         window.FindElement('_GENOUTPUT_').Update(output)
     if event == 'Generate' and values['_GENIN_'] == 'Beast Style':
         output = beaststylegen()
+        window.FindElement('_GENOUTPUT_').Update(output)
+    if event == 'Generate' and values['_GENIN_'] == 'Place':
+        output = placegen()
         window.FindElement('_GENOUTPUT_').Update(output)
     if event == '_WEAPONIN_':
         output = weapongen(values['_WEAPONIN_'])
