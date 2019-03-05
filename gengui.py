@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 sg.SetOptions(text_element_background_color='#D5D5D5', button_color=("#FFFFFF", "#6D7993"), background_color="#9099A2")
   
 generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
-                    [sg.Multiline('Generator info', size=(80,13), key='_GENOUTPUT_', do_not_clear=True)],
+                    [sg.Multiline('Generator info', size=(80,14), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate')]]
 
 weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
@@ -15,11 +15,11 @@ roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_cl
                  [sg.Button("Roll"), sg.Text("Limit of 20 dice and 10,000 sides.")]]
 
 beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "Small Pack Hunter", "Large Pack Hunter", "Large Aggresive Prey Animal", "Lesser Lone Predator", "Greater Lone Predator", "Terrifying Apex Predator", "Gengineered Murder Beast"), auto_size_text=True, key='_BEASTINFOINPUT_', readonly=True, change_submits=True)],
-                    [sg.Multiline('Beast info', size=(80,8), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
+                    [sg.Multiline('Beast info', size=(80,9), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
                     [sg.Text("")]]
 
 npcinfo_column = [[sg.Text('NPC:'), sg.InputCombo(("Peaceful Human","Martial Human","Veteran Fighter","Elite Fighter","Heroic Fighter","Barbarian Hero","Barbarian Tribal","Gang Boss","Gang Member","Gengineered Killer","Legendary Fighter","Military Elite","Military Soldier","Normal Human","Pirate King","Police Officer","Serial Killer","Skilled Professional","Warrior Tyrant"), auto_size_text=True, key='_NPCINFOINPUT_', readonly=True, change_submits=True)],
-                    [sg.Multiline('NPC info', size=(80,8), key='_NPCINFOOUTPUT_', do_not_clear=True)],
+                    [sg.Multiline('NPC info', size=(80,9), key='_NPCINFOOUTPUT_', do_not_clear=True)],
                     [sg.Text("")]]
 
 layout = [[sg.Column(generator_column, background_color="#D5D5D5"), sg.Column(roller_column, background_color="#D5D5D5")],
@@ -27,6 +27,15 @@ layout = [[sg.Column(generator_column, background_color="#D5D5D5"), sg.Column(ro
           [sg.Column(beastinfo_column, background_color="#D5D5D5"), sg.Column(npcinfo_column, background_color="#D5D5D5")]]
   
 window = sg.Window('SWN Generator').Layout(layout)
+
+def get_reaction():
+    reaction_roll = random.random()
+    if reaction_roll < 0.027777: reaction = "Hostile, reacting as negatively as is plausible"
+    elif 0.027777 < reaction_roll < 0.277777: reaction = "Negative, unfriendly and unhelpful"
+    elif 0.277777 < reaction_roll < 0.722222: reaction = "Neutral, reacting predictably or warily"
+    elif 0.722222 < reaction_roll < 0.972222: reaction = "Positive, potentially cooperative with PCs"
+    else: reaction = "Friendly, helpful as is plausible to be"
+    return reaction
 
 def npcinfogen(npc):
     npcs = {"Peaceful Human":"HD: 1\nAC: 10\nAtk: +0\nDmg.: Unarmed\nMove: 10m\nML: 6\nSkills: +1\nSaves: 15+",
@@ -219,7 +228,8 @@ def onerollnpcgen():
                            "Most obvious character trait: Protectiveness",
                            "Most obvious character trait: Resentment",
                            "Most obvious character trait: Shame"])
-    output = f"{age}\n{background}\n{role}\n{desire}\n{problem}\n{trait}"
+    reaction = get_reaction()
+    output = f"{age}\n{background}\n{role}\n{desire}\n{problem}\n{trait}\nReaction: {reaction}"
     return output
 
 def onerollpatrongen():
@@ -283,7 +293,8 @@ def onerollpatrongen():
                                   "Complication: Payment is in avidly-pursued hot goods",
                                   "Complication: The true goal is a subsidiary part of the job",
                                   "Complication: No complications; it’s just as it seems to be"])
-    output = f"{eagerness}\n{trustworthiness}\n{noncash}\n{challenge}\n{counter}\n{complication}"
+    reaction = get_reaction()
+    output = f"{eagerness}\n{trustworthiness}\n{noncash}\n{challenge}\n{counter}\n{complication}\nReaction: {reaction}"
     return output
 
 def roller(rolls, sides):
@@ -631,6 +642,7 @@ def npcgen():
     npc_want = random.choice(list(want))
     npc_power = random.choice(list(power))
     npc_hook = random.choice(list(hook))
+    reaction = get_reaction()
     output = (f"NPC Name: {first_name} {last_name}\n"
               f"Age: {age}\n"
               f"Gender: {gender}\n"
@@ -640,7 +652,8 @@ def npcgen():
               f"Motivation: {npc_motivation}\n"
               f"Want: {npc_want}\n"
               f"Power: {npc_power}\n"
-              f"Hook: {npc_hook}")
+              f"Hook: {npc_hook}\n"
+              f"Reaction: {reaction}")
     return output
 
 def problemgen():
