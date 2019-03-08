@@ -179,33 +179,33 @@ def placegen():
                  "Ancient defenses awaken",
                  "The PC’s goal is imperiled"]
     hazard_choice = random.randint(1, 8)
-    if hazard_choice = 1:
-        example = f"Social example: {social_example}"
-        danger = f"Social danger: {social_danger}"
-    elif hazard_choice = 2:
-        example = f"Legal example: {legal_example}"
-        danger = f"Legal danger: {legal_danger}"
-    elif hazard_choice = 3:
-        example = f"Environmental example: {environmental_example}"
-        danger = f"Environmental danger: {environmental_danger}"
-    elif hazard_choice = 4:
-        example = f"Trap example: {trap_example}"
-        danger = f"Trap danger: {trap_danger}"
-    elif hazard_choice = 5:
-        example = f"Animal example: {animal_example}"
-        danger = f"Animal danger: {animal_danger}"
-    elif hazard_choice = 6:
-        example = f"Sentient example: {sentient_example}"
-        danger = f"Sentient danger: {sentient_danger}"
-    elif hazard_choice = 7:
-        example = f"Decay example: {decay_example}"
-        danger = f"Decay danger: {decay_danger}"
-    elif hazard_choice = 8:
-        example = f"PC-induced example: {pc_example}"
-        danger = f"PC-induced danger: {pc_danger}"
-    output = (f"Reward: {reward}\n"
-              f"Civilized ongoings: {civilized}\n"
-              f"Wilderness ongoings: {wilderness}\n"
+    if hazard_choice == 1:
+        example = f"Social example: {random.choice(social_example)}"
+        danger = f"Social danger: {random.choice(social_danger)}"
+    elif hazard_choice == 2:
+        example = f"Legal example: {random.choice(legal_example)}"
+        danger = f"Legal danger: {random.choice(legal_danger)}"
+    elif hazard_choice == 3:
+        example = f"Environmental example: {random.choice(environmental_example)}"
+        danger = f"Environmental danger: {random.choice(environmental_danger)}"
+    elif hazard_choice == 4:
+        example = f"Trap example: {random.choice(trap_example)}"
+        danger = f"Trap danger: {random.choice(trap_danger)}"
+    elif hazard_choice == 5:
+        example = f"Animal example: {random.choice(animal_example)}"
+        danger = f"Animal danger: {random.choice(animal_danger)}"
+    elif hazard_choice == 6:
+        example = f"Sentient example: {random.choice(sentient_example)}"
+        danger = f"Sentient danger: {random.choice(sentient_danger)}"
+    elif hazard_choice == 7:
+        example = f"Decay example: {random.choice(decay_example)}"
+        danger = f"Decay danger: {random.choice(decay_danger)}"
+    elif hazard_choice == 8:
+        example = f"PC-induced example: {random.choice(pc_example)}"
+        danger = f"PC-induced danger: {random.choice(pc_danger)}"
+    output = (f"Reward: {random.choice(reward)}\n"
+              f"Civilized ongoings: {random.choice(civilized)}\n"
+              f"Wilderness ongoings: {random.choice(wilderness)}\n"
               f"{example}\n"
               f"{danger}")
     return output
