@@ -347,7 +347,7 @@ def onerollnpcgen():
                          "Age: Middle-aged or elderly"])
     background = random.choice(["Background: The local underclass or poorest natives",
                                 "Background: Common laborers or cube workers",
-                                "Background: Aspiring bourgeoise or upper clas",
+                                "Background: Aspiring bourgeoisie or upper class",
                                 "Background: The elite of this society",
                                 "Background: Minority or foreigners",
                                 "Background: Offworlders or exotics"])
