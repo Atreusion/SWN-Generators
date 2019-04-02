@@ -341,133 +341,145 @@ def beaststylegen():
     return output
 
 def onerollnpcgen():
-    age = random.choice(["Age: Unusually young or old for their role",
-                         "Age: Young adult",
-                         "Age: Mature prime",
-                         "Age: Middle-aged or elderly"])
-    background = random.choice(["Background: The local underclass or poorest natives",
-                                "Background: Common laborers or cube workers",
-                                "Background: Aspiring bourgeoisie or upper class",
-                                "Background: The elite of this society",
-                                "Background: Minority or foreigners",
-                                "Background: Offworlders or exotics"])
-    role = random.choice(["Role in society: Criminal, thug, thief, swindler",
-                          "Role in society: Menial, cleaner, retail worker, servant",
-                          "Role in society: Unskilled heavy labor, porter, construction",
-                          "Role in society: Skilled trade, electrician, mechanic, pilot",
-                          "Role in society: Idea worker, programmer, writer",
-                          "Role in society: Merchant, business owner, trader, banker",
-                          "Role in society: Official, bureaucrat, courtier, clerk",
-                          "Role in society: Military, soldier, enforcer, law office"])
-    desire = random.choice(["Greatest desire: They want a particular romantic partner",
-                            "Greatest desire: They want money for them or a loved one",
-                            "Greatest desire: They want a promotion in their job",
-                            "Greatest desire: They want answers about a past trauma",
-                            "Greatest desire: They want revenge on an enemy",
-                            "Greatest desire: They want to help a beleaguered friend",
-                            "Greatest desire: They want an entirely different job",
-                            "Greatest desire: They want protection from an enemy",
-                            "Greatest desire: They want to leave their current life",
-                            "Greatest desire: They want fame and glory",
-                            "Greatest desire: They want power over those around them",
-                            "Greatest desire: They have everything they want from life"])
-    problem = random.choice(["Biggest Problem: They have significant debt or money woes",
-                             "Biggest Problem: A loved one is in trouble; reroll for it",
-                             "Biggest Problem: Romantic failure with a desired person",
-                             "Biggest Problem: Drug or behavioral addiction",
-                             "Biggest Problem: Their superior dislikes or resents them",
-                             "Biggest Problem: They have a persistent sickness",
-                             "Biggest Problem: They hate their job or life situation",
-                             "Biggest Problem: Someone dangerous is targeting them",
-                             "Biggest Problem: They’re pursuing a disastrous purpose",
-                             "Biggest Problem: They have no problems worth mentioning"])
-    trait = random.choice(["Most obvious character trait: Ambition",
-                           "Most obvious character trait: Avarice",
-                           "Most obvious character trait: Bitterness",
-                           "Most obvious character trait: Courage",
-                           "Most obvious character trait: Cowardice",
-                           "Most obvious character trait: Curiosity",
-                           "Most obvious character trait: Deceitfulness",
-                           "Most obvious character trait: Determination",
-                           "Most obvious character trait: Devotion to a cause",
-                           "Most obvious character trait: Filiality",
-                           "Most obvious character trait: Hatred",
-                           "Most obvious character trait: Honesty",
-                           "Most obvious character trait: Hopefulness",
-                           "Most obvious character trait: Love of a person",
-                           "Most obvious character trait: Nihilism",
-                           "Most obvious character trait: Paternalism",
-                           "Most obvious character trait: Pessimism",
-                           "Most obvious character trait: Protectiveness",
-                           "Most obvious character trait: Resentment",
-                           "Most obvious character trait: Shame"])
+    age = random.choice(["Unusually young or old for their role",
+                         "Young adult",
+                         "Mature prime",
+                         "Middle-aged or elderly"])
+    background = random.choice(["The local underclass or poorest natives",
+                                "Common laborers or cube workers",
+                                "Aspiring bourgeoisie or upper class",
+                                "The elite of this society",
+                                "Minority or foreigners",
+                                "Offworlders or exotics"])
+    role = random.choice(["Criminal, thug, thief, swindler",
+                          "Menial, cleaner, retail worker, servant",
+                          "Unskilled heavy labor, porter, construction",
+                          "Skilled trade, electrician, mechanic, pilot",
+                          "Idea worker, programmer, writer",
+                          "Merchant, business owner, trader, banker",
+                          "Official, bureaucrat, courtier, clerk",
+                          "Military, soldier, enforcer, law office"])
+    desire = random.choice(["They want a particular romantic partner",
+                            "They want money for them or a loved one",
+                            "They want a promotion in their job",
+                            "They want answers about a past trauma",
+                            "They want revenge on an enemy",
+                            "They want to help a beleaguered friend",
+                            "They want an entirely different job",
+                            "They want protection from an enemy",
+                            "They want to leave their current life",
+                            "They want fame and glory",
+                            "They want power over those around them",
+                            "They have everything they want from life"])
+    problem = random.choice(["They have significant debt or money woes",
+                             "A loved one is in trouble; reroll for it",
+                             "Romantic failure with a desired person",
+                             "Drug or behavioral addiction",
+                             "Their superior dislikes or resents them",
+                             "They have a persistent sickness",
+                             "They hate their job or life situation",
+                             "Someone dangerous is targeting them",
+                             "They’re pursuing a disastrous purpose",
+                             "They have no problems worth mentioning"])
+    trait = random.choice(["Ambition",
+                           "Avarice",
+                           "Bitterness",
+                           "Courage",
+                           "Cowardice",
+                           "Curiosity",
+                           "Deceitfulness",
+                           "Determination",
+                           "Devotion to a cause",
+                           "Filiality",
+                           "Hatred",
+                           "Honesty",
+                           "Hopefulness",
+                           "Love of a person",
+                           "Nihilism",
+                           "Paternalism",
+                           "Pessimism",
+                           "Protectiveness",
+                           "Resentment",
+                           "Shame"])
     reaction = get_reaction()
-    output = f"{age}\n{background}\n{role}\n{desire}\n{problem}\n{trait}\nReaction: {reaction}"
+    output = (f"Age: {age}\n"
+              f"Background: {background}\n"
+              f"Role in society: {role}\n"
+              f"Greatest desire: {desire}\n"
+              f"Biggest Problem: {problem}\n"
+              f"Most obvious character trait: {trait}\n"
+              f"Reaction: {reaction}")
     return output
 
 def onerollpatrongen():
-    eagerness = random.choice(["Eagerness to hire: Cautious, but can be convinced to hire",
-                               "Eagerness to hire: Willing to promise standard rates",
-                               "Eagerness to hire: Eager, willing to offer a bonus",
-                               "Eagerness to hire: Desperate, might offer what they can’t pay"])
-    trustworthiness = random.choice(["Trustworthiness: They intend to totally screw the PCs",
-                                     "Trustworthiness: They won’t pay unless forced to do so",
-                                     "Trustworthiness: They’ll pay slowly or reluctantly",
-                                     "Trustworthiness: They’ll pay, but discount for mistakes",
-                                     "Trustworthiness: They’ll pay without quibbling",
-                                     "Trustworthiness: They’ll pay more than they promised"])
-    noncash = random.choice(["Non-cash rewards: Government official favors owed",
-                             "Non-cash rewards: Property in the area",
-                             "Non-cash rewards: An item very valuable on another world",
-                             "Non-cash rewards: Pretech mod components",
-                             "Non-cash rewards: Useful pretech artifact",
-                             "Non-cash rewards: Information the PCs need",
-                             "Non-cash rewards: Membership in a powerful group",
-                             "Non-cash rewards: Black market access",
-                             "Non-cash rewards: Use of restricted facilities or shipyards",
-                             "Non-cash rewards: Shares in a profitable business",
-                             "Non-cash rewards: Maps to a hidden or guarded treasure",
-                             "Non-cash rewards: Illegal but valuable weapons or gear"])
-    challenge = random.choice(["Challenge: Kill somebody who might deserve it",
-                               "Challenge: Kidnap someone dangerous",
-                               "Challenge: Steal a well-guarded object",
-                               "Challenge: Arson or sabotage on a place",
-                               "Challenge: Get proof of some misdeed",
-                               "Challenge: Protect someone from an immediate threat",
-                               "Challenge: Transport someone through danger",
-                               "Challenge: Guard an object being transported"])
-    counter = random.choice(["Counterforce: A treacherous employer or subordinate",
-                             "Counterforce: An open and known enemy of the patron",
-                             "Counterforce: Official governmental meddling",
-                             "Counterforce: An unknown rival of the patron",
-                             "Counterforce: The macguffin itself opposes them",
-                             "Counterforce: Very short time frame allowed",
-                             "Counterforce: The job is spectacularly illegal",
-                             "Counterforce: A participant would profit by their failure",
-                             "Counterforce: The patron is badly wrong about a thing",
-                             "Counterforce: The locals are against the patron"])
-    complication = random.choice(["Complication: An ambush is laid somewhere",
-                                  "Complication: PC involvement is leaked to the enemy",
-                                  "Complication: The patron gives faulty aid somehow",
-                                  "Complication: Failing would be extremely unhealthy",
-                                  "Complication: The job IDs them as allies of a local faction",
-                                  "Complication: The macguffin is physically dangerous",
-                                  "Complication: An important location is hard to get into",
-                                  "Complication: Succeeding would be morally distasteful",
-                                  "Complication: A supposed ally is very unhelpful or stupid",
-                                  "Complication: The patron badly misunderstood the PCs",
-                                  "Complication: The job changes suddenly partway through",
-                                  "Complication: An unexpected troublemaker is involved",
-                                  "Complication: Critical gear will fail partway through",
-                                  "Complication: An unrelated accident complicates things",
-                                  "Complication: Payment comes in a hard-to-handle form",
-                                  "Complication: Someone is turning traitor on the patron",
-                                  "Complication: A critical element has suddenly moved",
-                                  "Complication: Payment is in avidly-pursued hot goods",
-                                  "Complication: The true goal is a subsidiary part of the job",
-                                  "Complication: No complications; it’s just as it seems to be"])
+    eagerness = random.choice(["Cautious, but can be convinced to hire",
+                               "Willing to promise standard rates",
+                               "Eager, willing to offer a bonus",
+                               "Desperate, might offer what they can’t pay"])
+    trustworthiness = random.choice(["They intend to totally screw the PCs",
+                                     "They won’t pay unless forced to do so",
+                                     "They’ll pay slowly or reluctantly",
+                                     "They’ll pay, but discount for mistakes",
+                                     "They’ll pay without quibbling",
+                                     "They’ll pay more than they promised"])
+    noncash = random.choice(["Government official favors owed",
+                             "Property in the area",
+                             "An item very valuable on another world",
+                             "Pretech mod components",
+                             "Useful pretech artifact",
+                             "Information the PCs need",
+                             "Membership in a powerful group",
+                             "Black market access",
+                             "Use of restricted facilities or shipyards",
+                             "Shares in a profitable business",
+                             "Maps to a hidden or guarded treasure",
+                             "Illegal but valuable weapons or gear"])
+    challenge = random.choice(["Kill somebody who might deserve it",
+                               "Kidnap someone dangerous",
+                               "Steal a well-guarded object",
+                               "Arson or sabotage on a place",
+                               "Get proof of some misdeed",
+                               "Protect someone from an immediate threat",
+                               "Transport someone through danger",
+                               "Guard an object being transported"])
+    counter = random.choice(["A treacherous employer or subordinate",
+                             "An open and known enemy of the patron",
+                             "Official governmental meddling",
+                             "An unknown rival of the patron",
+                             "The macguffin itself opposes them",
+                             "Very short time frame allowed",
+                             "The job is spectacularly illegal",
+                             "A participant would profit by their failure",
+                             "The patron is badly wrong about a thing",
+                             "The locals are against the patron"])
+    complication = random.choice(["An ambush is laid somewhere",
+                                  "PC involvement is leaked to the enemy",
+                                  "The patron gives faulty aid somehow",
+                                  "Failing would be extremely unhealthy",
+                                  "The job IDs them as allies of a local faction",
+                                  "The macguffin is physically dangerous",
+                                  "An important location is hard to get into",
+                                  "Succeeding would be morally distasteful",
+                                  "A supposed ally is very unhelpful or stupid",
+                                  "The patron badly misunderstood the PCs",
+                                  "The job changes suddenly partway through",
+                                  "An unexpected troublemaker is involved",
+                                  "Critical gear will fail partway through",
+                                  "An unrelated accident complicates things",
+                                  "Payment comes in a hard-to-handle form",
+                                  "Someone is turning traitor on the patron",
+                                  "A critical element has suddenly moved",
+                                  "Payment is in avidly-pursued hot goods",
+                                  "The true goal is a subsidiary part of the job",
+                                  "No complications; it’s just as it seems to be"])
     reaction = get_reaction()
-    output = f"{eagerness}\n{trustworthiness}\n{noncash}\n{challenge}\n{counter}\n{complication}\nReaction: {reaction}"
+    output = (f"Eagerness to hire: {eagerness}\n"
+              f"Trustworthiness: {trustworthiness}\n"
+              f"Non-cash rewards: {noncash}\n"
+              f"Challenge: {challenge}\n"
+              f"Counterforce: {counter}\n"
+              f"Complication: {complication}\n"
+              f"Reaction: {reaction}")
     return output
 
 def roller(rolls, sides):
@@ -803,10 +815,8 @@ def npcgen():
     culture = random.choice(list(namegen.items()))
     culture_name = culture[0]
     gender = random.choice(["Male", "Female"])
-    if gender == "Male":
-        first_name = random.choice(list(culture[1]["male_names"]))
-    else:
-        first_name = random.choice(list(culture[1]["female_names"]))
+    if gender == "Male": first_name = random.choice(list(culture[1]["male_names"]))
+    else: first_name = random.choice(list(culture[1]["female_names"]))
     last_name = random.choice(list(culture[1]["surnames"]))
     age = str(random.randint(18,200))
     npc_manner = random.choice(list(manner))
@@ -898,138 +908,144 @@ def problemgen():
     return output
 
 def urbangen():
-    venue = ["Venue: In the middle of the street",
-             "Venue: In a public plaza",
-             "Venue: Down a side alley",
-             "Venue: Inside a local business",
-             "Venue: Next to or in a public park",
-             "Venue: At a mass-transit station"]
-    pc_involvment = ["Why PCs are involved: A sympathetic participant appeals to them",
-                     "Why PCs are involved: Ways around it are all dangerous/blocked",
-                     "Why PCs are involved: It happens immediately around them",
-                     "Why PCs are involved: A valuable thing looks snatchable amid it",
-                     "Why PCs are involved: A participant offers a reward for help",
-                     "Why PCs are involved: Someone mistakenly involves the PCs in it",
-                     "Why PCs are involved: The seeming way out just leads deeper in",
-                     "Why PCs are involved: Responsibility is somehow pinned on them"]
-    nature = ["Nature of event: A parade or festival is being disrupted",
-              "Nature of event: Innocents are being assaulted",
-              "Nature of event: An establishment is being robbed",
-              "Nature of event: A disturbance over local politics happens",
-              "Nature of event: Someone is being blamed for something",
-              "Nature of event: Fires or building collapses are happening",
-              "Nature of event: A medical emergency is happening",
-              "Nature of event: Someone’s trying to cheat the PCs",
-              "Nature of event: A vehicle accident is happening",
-              "Nature of event: A religious ceremony is being disrupted"]
-    conflict = ["Conflict about: Money, extortion, payment due, debts",
-                "Conflict about: Respect, submission to social authority",
-                "Conflict about: Grudges, ethnic resentment, gang payback",
-                "Conflict about: Politics, religion, or other ideology"]
-    antagonists = ["Antagonists: A local bully and their thugs",
-                   "Antagonists: A ruthless political boss and their zealots",
-                   "Antagonists: Violent criminals",
-                   "Antagonists: Religious fanatics",
-                   "Antagonists: A blisteringly obnoxious offworlder",
-                   "Antagonists: Corrupt or over-strict government official",
-                   "Antagonists: A mob of intoxicated locals",
-                   "Antagonists: A ranting demagogue and their followers",
-                   "Antagonists: A stupidly bull-headed local grandee",
-                   "Antagonists: A very capable assassin or strong-arm",
-                   "Antagonists: A self-centered local scion of power",
-                   "Antagonists: A confused foreigner or backwoodsman"]
-    features = ["Relevant urban features:Heavy traffic running through the place",
-                "Relevant urban features: Music blaring at deafening volumes",
-                "Relevant urban features: Two groups present that detest each other",
-                "Relevant urban features: Large delivery taking place right there",
-                "Relevant urban features: Swarm of schoolkids or feral youth",
-                "Relevant urban features: Insistent soapbox preacher here",
-                "Relevant urban features: Several pickpockets working the crowd",
-                "Relevant urban features: A kiosk is tipping over and spilling things",
-                "Relevant urban features: Streetlights are out or visibility is low",
-                "Relevant urban features: A cop patrol is here and reluctant to act",
-                "Relevant urban features: PC-hostile reporters are recording here",
-                "Relevant urban features: Someone’s trying to sell something to PCs",
-                "Relevant urban features: Feral dogs or other animals crowd here",
-                "Relevant urban features: Unrelated activists are protesting here",
-                "Relevant urban features: Street kids are trying to steal from the PCs",
-                "Relevant urban features: GPS maps are dangerously wrong here",
-                "Relevant urban features: Downed power lines are a danger here",
-                "Relevant urban features: Numerous open manholes and utility holes",
-                "Relevant urban features: The street’s blockaded by something",
-                "Relevant urban features: Crowds so thick one can barely move"]
-    output = (f"{random.choice(venue)}\n{random.choice(pc_involvment)}\n"
-              f"{random.choice(nature)}\n{random.choice(conflict)}\n"
-              f"{random.choice(antagonists)}\n{random.choice(features)}")
+    venue = ["In the middle of the street",
+             "In a public plaza",
+             "Down a side alley",
+             "Inside a local business",
+             "Next to or in a public park",
+             "At a mass-transit station"]
+    pc_involvment = ["A sympathetic participant appeals to them",
+                     "Ways around it are all dangerous/blocked",
+                     "It happens immediately around them",
+                     "A valuable thing looks snatchable amid it",
+                     "A participant offers a reward for help",
+                     "Someone mistakenly involves the PCs in it",
+                     "The seeming way out just leads deeper in",
+                     "Responsibility is somehow pinned on them"]
+    nature = ["A parade or festival is being disrupted",
+              "Innocents are being assaulted",
+              "An establishment is being robbed",
+              "A disturbance over local politics happens",
+              "Someone is being blamed for something",
+              "Fires or building collapses are happening",
+              "A medical emergency is happening",
+              "Someone’s trying to cheat the PCs",
+              "A vehicle accident is happening",
+              "A religious ceremony is being disrupted"]
+    conflict = ["Money, extortion, payment due, debts",
+                "Respect, submission to social authority",
+                "Grudges, ethnic resentment, gang payback",
+                "Politics, religion, or other ideology"]
+    antagonists = ["A local bully and their thugs",
+                   "A ruthless political boss and their zealots",
+                   "Violent criminals",
+                   "Religious fanatics",
+                   "A blisteringly obnoxious offworlder",
+                   "Corrupt or over-strict government official",
+                   "A mob of intoxicated locals",
+                   "A ranting demagogue and their followers",
+                   "A stupidly bull-headed local grandee",
+                   "A very capable assassin or strong-arm",
+                   "A self-centered local scion of power",
+                   "A confused foreigner or backwoodsman"]
+    features = ["Heavy traffic running through the place",
+                "Music blaring at deafening volumes",
+                "Two groups present that detest each other",
+                "Large delivery taking place right there",
+                "Swarm of schoolkids or feral youth",
+                "Insistent soapbox preacher here",
+                "Several pickpockets working the crowd",
+                "A kiosk is tipping over and spilling things",
+                "Streetlights are out or visibility is low",
+                "A cop patrol is here and reluctant to act",
+                "PC-hostile reporters are recording here",
+                "Someone’s trying to sell something to PCs",
+                "Feral dogs or other animals crowd here",
+                "Unrelated activists are protesting here",
+                "Street kids are trying to steal from the PCs",
+                "GPS maps are dangerously wrong here",
+                "Downed power lines are a danger here",
+                "Numerous open manholes and utility holes",
+                "The street’s blockaded by something",
+                "Crowds so thick one can barely move"]
+    output = (f"Venue: {random.choice(venue)}\n"
+              f"Why PCs are involved: {random.choice(pc_involvment)}\n"
+              f"Nature of event: {random.choice(nature)}\n"
+              f"Conflict about: {random.choice(conflict)}\n"
+              f"Antagonists: {random.choice(antagonists)}\n"
+              f"Relevant urban features: {random.choice(features)}")
     return output
 
 def wildernessgen():
-    weather = ["Weather and Lighting: Takes place in daylight and clear weather",
-               "Weather and Lighting: Daylight, but fog, mist, rain or the like",
-               "Weather and Lighting: Daylight, but harsh seasonal weather",
-               "Weather and Lighting: Night encounter, but clear weather",
-               "Weather and Lighting: Night, with rain or other obscuring effects",
-               "Weather and Lighting: Night, with terrible weather and wind"]
-    nature = ["Nature of encounter: Attack by pack of hostiles",
-              "Nature of encounter: Ambush by single lone hostile",
-              "Nature of encounter: Meet people who don’t want to be met",
-              "Nature of encounter: Encounter people in need of aid",
-              "Nature of encounter: Encounter hostile creatures",
-              "Nature of encounter: Nearby feature is somehow dangerous",
-              "Nature of encounter: Nearby feature promises useful loot",
-              "Nature of encounter: Meet hostiles that aren’t immediately so"]
-    friendly = ["Friendly creature(s): Affable but reclusive hermit",
-                "Friendly creature(s): Local herd animal let loose to graze",
-                "Friendly creature(s): Government ranger or circuit judge",
-                "Friendly creature(s): Curious local animal",
-                "Friendly creature(s): Remote homesteader and family",
-                "Friendly creature(s): Working trapper or hunter",
-                "Friendly creature(s): Back-country villager or native",
-                "Friendly creature(s): Hiker or wilderness tourist",
-                "Friendly creature(s): Religious recluse or holy person",
-                "Friendly creature(s): Impoverished social exile"]
-    enc_range = ["Encounter Range: Visible from a long distance away",
-                 "Encounter Range: Noticed 1d4 hundred meters away",
-                 "Encounter Range: Noticed only within 1d60 meters",
-                 "Encounter Range: Noticed only when adjacent to the event"]
-    hostile = ["Hostile creature(s): Bandits in their wilderness hideout",
-               "Hostile creature(s): Dangerous locals looking for easy marks",
-               "Hostile creature(s): Rabid or diseased large predator",
-               "Hostile creature(s): Pack of hungry hunting beasts",
-               "Hostile creature(s): Herd of potentially dangerous prey animals",
-               "Hostile creature(s): Swarm of dangerous vermin",
-               "Hostile creature(s): Criminal seeking to evade the law",
-               "Hostile creature(s): Brutal local landowner and their men",
-               "Hostile creature(s): Crazed hermit seeking enforced solitude",
-               "Hostile creature(s): Friendly-seeming guide into lethal danger",
-               "Hostile creature(s): Harmless-looking but dangerous beast",
-               "Hostile creature(s): Confidence man seeking to gull the PCs"]
-    features = ["Nearby feature: Overgrown homestead",
-                "Nearby feature: Stream prone to flash-flooding",
-                "Nearby feature: Narrow bridge or beam over deep cleft",
-                "Nearby feature: Box canyon with steep sides",
-                "Nearby feature: Unstable hillside that slides if disturbed",
-                "Nearby feature: Long-lost crash site of a gravflyer",
-                "Nearby feature: Once-inhabited cave or tunnel",
-                "Nearby feature: Steep and dangerous cliff",
-                "Nearby feature: Quicksand-laden swamp or dust pit",
-                "Nearby feature: Ruins of a ghost town or lost hamlet",
-                "Nearby feature: Hunting cabin with necessities",
-                "Nearby feature: Ill-tended graveyard of a lost family stead",
-                "Nearby feature: Narrow pass that’s easily blocked",
-                "Nearby feature: Dilapidated resort building",
-                "Nearby feature: Remote government monitoring outpost",
-                "Nearby feature: Illicit substance farm or processing center",
-                "Nearby feature: Old and forgotten battleground",
-                "Nearby feature: Zone overrun by dangerous plants",
-                "Nearby feature: Thick growth that lights up at a spark",
-                "Nearby feature: Abandoned vehicle"]
+    weather = ["Takes place in daylight and clear weather",
+               "Daylight, but fog, mist, rain or the like",
+               "Daylight, but harsh seasonal weather",
+               "Night encounter, but clear weather",
+               "Night, with rain or other obscuring effects",
+               "Night, with terrible weather and wind"]
+    nature = ["Attack by pack of hostiles",
+              "Ambush by single lone hostile",
+              "Meet people who don’t want to be met",
+              "Encounter people in need of aid",
+              "Encounter hostile creatures",
+              "Nearby feature is somehow dangerous",
+              "Nearby feature promises useful loot",
+              "Meet hostiles that aren’t immediately so"]
+    friendly = ["Affable but reclusive hermit",
+                "Local herd animal let loose to graze",
+                "Government ranger or circuit judge",
+                "Curious local animal",
+                "Remote homesteader and family",
+                "Working trapper or hunter",
+                "Back-country villager or native",
+                "Hiker or wilderness tourist",
+                "Religious recluse or holy person",
+                "Impoverished social exile"]
+    enc_range = ["Visible from a long distance away",
+                 "Noticed 1d4 hundred meters away",
+                 "Noticed only within 1d60 meters",
+                 "Noticed only when adjacent to the event"]
+    hostile = ["Bandits in their wilderness hideout",
+               "Dangerous locals looking for easy marks",
+               "Rabid or diseased large predator",
+               "Pack of hungry hunting beasts",
+               "Herd of potentially dangerous prey animals",
+               "Swarm of dangerous vermin",
+               "Criminal seeking to evade the law",
+               "Brutal local landowner and their men",
+               "Crazed hermit seeking enforced solitude",
+               "Friendly-seeming guide into lethal danger",
+               "Harmless-looking but dangerous beast",
+               "Confidence man seeking to gull the PCs"]
+    features = ["Overgrown homestead",
+                "Stream prone to flash-flooding",
+                "Narrow bridge or beam over deep cleft",
+                "Box canyon with steep sides",
+                "Unstable hillside that slides if disturbed",
+                "Long-lost crash site of a gravflyer",
+                "Once-inhabited cave or tunnel",
+                "Steep and dangerous cliff",
+                "Quicksand-laden swamp or dust pit",
+                "Ruins of a ghost town or lost hamlet",
+                "Hunting cabin with necessities",
+                "Ill-tended graveyard of a lost family stead",
+                "Narrow pass that’s easily blocked",
+                "Dilapidated resort building",
+                "Remote government monitoring outpost",
+                "Illicit substance farm or processing center",
+                "Old and forgotten battleground",
+                "Zone overrun by dangerous plants",
+                "Thick growth that lights up at a spark",
+                "Abandoned vehicle"]
     encounter_range = random.choice(enc_range)
     encounter_range = encounter_range.replace("1d4", str(random.randint(1,4)))
     encounter_range = encounter_range.replace("1d6", str(random.randint(1,6)))
-    output = (f"{random.choice(weather)}\n{random.choice(nature)}\n"
-              f"{random.choice(friendly)}\n{encounter_range}\n"
-              f"{random.choice(hostile)}\n{random.choice(features)}")
+    output = (f"Weather and Lighting: {random.choice(weather)}\n"
+              f"Nature of encounter: {random.choice(nature)}\n"
+              f"Friendly creature(s): {random.choice(friendly)}\n"
+              f"Encounter Range: {encounter_range}\n"
+              f"Hostile creature(s): {random.choice(hostile)}\n"
+              f"Nearby feature: {random.choice(features)}")
     return output
 
 while True: 
