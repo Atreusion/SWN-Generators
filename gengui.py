@@ -7,12 +7,17 @@ generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Proble
                     [sg.Multiline('Generator info', size=(80,14), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate')]]
 
-weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
-                 [sg.Multiline('Weapon info', size=(80,7), key='_WEAPONOUTPUT_', do_not_clear=True)],
-                 [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")]]
 roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (5, 1), do_not_clear=True, key = "_SIDESINPUT_")],
                  [sg.Multiline("Rolls and total", size=(80,5), key = "_ROLLSOUTPUT_", do_not_clear=True)],
                  [sg.Button("Roll"), sg.Text("Limit of 20 dice and 10,000 sides.")]]
+
+weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
+                 [sg.Multiline('Weapon info', size=(80,7), key='_WEAPONOUTPUT_', do_not_clear=True)],
+                 [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")]]
+
+roll_example_column = [[sg.Text('Type of roll:'), sg.InputCombo(("Saving throw", "Skill check", "Initiative roll", "Attack roll", "Damage roll"), auto_size_text=True, key='_ROLLEXINFOINPUT_', readonly=True, change_submits=True)],
+                       [sg.Multiline('Roll info', size=(80,9), key='_ROLLEXINFOOUTPUT_', do_not_clear=True)],
+                       [sg.Text("")]]
 
 beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "Small Pack Hunter", "Large Pack Hunter", "Large Aggresive Prey Animal", "Lesser Lone Predator", "Greater Lone Predator", "Terrifying Apex Predator", "Gengineered Murder Beast"), auto_size_text=True, key='_BEASTINFOINPUT_', readonly=True, change_submits=True)],
                     [sg.Multiline('Beast info', size=(80,9), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
@@ -23,10 +28,31 @@ npcinfo_column = [[sg.Text('NPC:'), sg.InputCombo(("Peaceful Human","Martial Hum
                     [sg.Text("")]]
 
 layout = [[sg.Column(generator_column, background_color="#D5D5D5"), sg.Column(roller_column, background_color="#D5D5D5")],
-          [sg.Column(weapon_column, background_color="#D5D5D5")],
+          [sg.Column(weapon_column, background_color="#D5D5D5"), sg.Column(roll_example_column, background_color="#D5D5D5")],
           [sg.Column(beastinfo_column, background_color="#D5D5D5"), sg.Column(npcinfo_column, background_color="#D5D5D5")]]
   
 window = sg.Window('SWN Generator').Layout(layout)
+
+def rollexinfogen(roll_type):
+    rolls_dict = {"Saving throw":("1d20\n"
+                                  "Check is found on character sheet:\n"
+                                  "15 minus character level minus...\n"
+                                  "physical (best of Str/Con mod) or...\n"
+                                  "evasion (best of Dex/Int mod) or...\n"
+                                  "mental (best of Int/Wis mod)\n"
+                                  "(character wins ties, PCs win opposed check ties)"),
+                  "Skill check":"2d6 + skill level (-1 if no skill) + attribute modifier",
+                  "Initiative roll":"1d8 + dex mod (PCs win ties)",
+                  "Damage roll":("Damage die + relevant attribute modifier\n"
+                                 "(+ Punch skill instead of attribute if it’s a punch attack)"),
+                  "Attack roll":("1d20 + attack bonus (usually half level round down, warrior/partial warrior have more, pg. 18)\n"
+                                 "+ skill level (i.e. 0, 1, etc..., -2 if no skill)\n"
+                                 "+ attribute modifier most relevant to the weapon\n"
+                                 "+ circumstance mod (pg. 49)\n"
+                                 "-4 if Snap attack\n"
+                                 "(vs AC, attacker wins ties)")}
+    output = rolls_dict[roll_type]
+    return output
 
 def get_reaction():
     reaction_roll = random.random()
@@ -1082,6 +1108,9 @@ while True:
     if event == '_WEAPONIN_':
         output = weapongen(values['_WEAPONIN_'])
         window.FindElement('_WEAPONOUTPUT_').Update(output)
+    if event == '_ROLLEXINFOINPUT_':
+        output = rollexinfogen(values['_ROLLEXINFOINPUT_'])
+        window.FindElement('_ROLLEXINFOOUTPUT_').Update(output)
     if event == '_BEASTINFOINPUT_':
         output = beastinfogen(values['_BEASTINFOINPUT_'])
         window.FindElement('_BEASTINFOOUTPUT_').Update(output)
