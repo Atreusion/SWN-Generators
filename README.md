@@ -37,4 +37,4 @@ Running the generator is fairly straightforward from here. Download [the file](h
 
 ## Permission
 
-Made with [permission from Kevin Crawford himself](https://old.reddit.com/r/SWN/comments/av868q/random_generator/ehdm603/). All SWN content is owned by [Kevin Crawford, Sine Nominee Publishing](https://sinenominepublishing.com/).
+Made with [permission from Kevin Crawford himself](https://old.reddit.com/r/SWN/comments/av868q/random_generator/ehdm603/). All SWN content is owned by [Kevin Crawford, Sine Nomine Publishing](https://sinenominepublishing.com/).
