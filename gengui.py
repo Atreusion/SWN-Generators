@@ -16,7 +16,7 @@ weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced 
                  [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")]]
 
 roll_example_column = [[sg.Text('Type of roll:'), sg.InputCombo(("Saving throw", "Skill check", "Initiative roll", "Attack roll", "Damage roll"), auto_size_text=True, key='_ROLLEXINFOINPUT_', readonly=True, change_submits=True)],
-                       [sg.Multiline('Roll info', size=(80,9), key='_ROLLEXINFOOUTPUT_', do_not_clear=True)],
+                       [sg.Multiline('Roll info', size=(80,8), key='_ROLLEXINFOOUTPUT_', do_not_clear=True)],
                        [sg.Text("")]]
 
 beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "Small Pack Hunter", "Large Pack Hunter", "Large Aggresive Prey Animal", "Lesser Lone Predator", "Greater Lone Predator", "Terrifying Apex Predator", "Gengineered Murder Beast"), auto_size_text=True, key='_BEASTINFOINPUT_', readonly=True, change_submits=True)],
