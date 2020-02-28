@@ -1,15 +1,17 @@
 import random
+import name_container
 import PySimpleGUI as sg
 
-sg.SetOptions(text_element_background_color='#D5D5D5', button_color=("#FFFFFF", "#6D7993"), background_color="#9099A2")
-  
 generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Place', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
                     [sg.Multiline('Generator info', size=(80,14), key='_GENOUTPUT_', do_not_clear=True)],
                     [sg.Button('Generate')]]
 
 roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (5, 1), do_not_clear=True, key = "_SIDESINPUT_")],
-                 [sg.Multiline("Rolls and total", size=(80,5), key = "_ROLLSOUTPUT_", do_not_clear=True)],
-                 [sg.Button("Roll"), sg.Text("Limit of 20 dice and 10,000 sides.")]]
+                 [sg.Multiline("Rolls and total", size=(80,4), key = "_ROLLSOUTPUT_", do_not_clear=True)],
+                 [sg.Button("Roll"), sg.Text("Limit of 20 dice and 10,000 sides.")],
+                 [sg.Text('_' * 80)],
+                 [sg.Button("Generate New First Name"), sg.Button("Generate New Last Name")],
+                 [sg.InputText(default_text=f"{random.choice(name_container.first_names)} {random.choice(name_container.last_names)}", size=(24,1), key='_NAMEGENOUTPUT_')]]
 
 weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
                  [sg.Multiline('Weapon info', size=(80,7), key='_WEAPONOUTPUT_', do_not_clear=True)],
@@ -27,9 +29,9 @@ npcinfo_column = [[sg.Text('NPC:'), sg.InputCombo(("Peaceful Human","Martial Hum
                     [sg.Multiline('NPC info', size=(80,9), key='_NPCINFOOUTPUT_', do_not_clear=True)],
                     [sg.Text("")]]
 
-layout = [[sg.Column(generator_column, background_color="#D5D5D5"), sg.Column(roller_column, background_color="#D5D5D5")],
-          [sg.Column(weapon_column, background_color="#D5D5D5"), sg.Column(roll_example_column, background_color="#D5D5D5")],
-          [sg.Column(beastinfo_column, background_color="#D5D5D5"), sg.Column(npcinfo_column, background_color="#D5D5D5")]]
+layout = [[sg.Column(generator_column), sg.Column(roller_column)],
+          [sg.Column(weapon_column), sg.Column(roll_example_column)],
+          [sg.Column(beastinfo_column), sg.Column(npcinfo_column)]]
   
 window = sg.Window('SWN Generator').Layout(layout)
 
@@ -1117,6 +1119,14 @@ while True:
     if event == '_NPCINFOINPUT_':
         output = npcinfogen(values['_NPCINFOINPUT_'])
         window.FindElement('_NPCINFOOUTPUT_').Update(output)
+    if event == "Generate New First Name":
+        last_name = values['_NAMEGENOUTPUT_'].split(' ')[1]
+        output = f"{random.choice(name_container.first_names)} {last_name}"
+        window.FindElement('_NAMEGENOUTPUT_').Update(output)
+    if event == "Generate New Last Name":
+        first_name = values['_NAMEGENOUTPUT_'].split(' ')[0]
+        output = f"{first_name} {random.choice(name_container.last_names)}"
+        window.FindElement('_NAMEGENOUTPUT_').Update(output)
     if event == "Roll" and values["_ROLLSINPUT_"] and values["_SIDESINPUT_"]:
         try:
             rolloutput = roller(values["_ROLLSINPUT_"], values["_SIDESINPUT_"])
