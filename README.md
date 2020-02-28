@@ -9,7 +9,7 @@ This should be cross-platform, but I have yet to test it on anything other than 
 
 ## Installation
 
-To install, you first need to install [Python 3.6+](https://www.python.org/downloads/). Download an install whichever version your computer needs. Linux users should have it pre-installed, but ```python3``` might not be up-to-date.
+To install, you first need to install [Python 3.6+](https://www.python.org/downloads/). Download and install whichever version your computer needs. Linux users should have it pre-installed, but ```python3``` might not be up-to-date.
 
 Second, you need to install [PySimpleGUI](https://github.com/PySimpleGUI/PySimpleGUI):
 
@@ -27,7 +27,7 @@ If ```py``` does not work, then you'll need to find where Python was installed a
 
 ```python -m pip install --upgrade PySimpleGUI```
 
-Windows users may also need to run the command prompt as administrator (right clicking the Command Prompt and selecting Run as administrator).
+Windows users likely also need to run the command prompt as administrator (right clicking the Command Prompt and selecting Run as administrator).
 
 I have yet to try to install and run this on Linux. I should be able to eventually refine that process and update this.
 
