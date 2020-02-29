@@ -5,9 +5,9 @@ Mainly made as a test to see if I could do it. I wanted originally to just have 
 
 ![Oh god it's ugly](screenshot.PNG "Oh god it's ugly")
 
-This should be cross-platform, but I have yet to test it on anything other than Windows. I have included a standalone .exe, as the installation procedure as it stands leaves a lot to be desired as an end user. If you don't trust it, [do it yourself](https://pysimplegui.readthedocs.io/#creating-a-windows-exe-file). I don't blame you! 
+This should be cross-platform, but I have yet to test it on anything other than Windows. I have included a standalone .exe as a release, as the installation procedure as it stands leaves a lot to be desired as an end user. If you don't trust it, [do it yourself](https://pysimplegui.readthedocs.io/#creating-a-windows-exe-file). I don't blame you! 
 
-## Installation
+## Prerequisites
 
 To install, you first need to install [Python 3.6+](https://www.python.org/downloads/). Download and install whichever version your computer needs. Linux users should have it pre-installed, but ```python3``` might not be up-to-date.
 
@@ -33,7 +33,31 @@ I have yet to try to install and run this on Linux. I should be able to eventual
 
 ## Running the SWN Generator
 
-Running the generator is fairly straightforward from here. Download [the file](https://github.com/Atreusion/SWN-Generators/raw/master/gengui.py) and either double-click it or run it through ```py``` or ```python3```.
+Running the generator is fairly straightforward from here. You have two options currently: either running it through the executable, or running gengui.py directly.
+
+### Running the Executable
+
+Download the latest [release](https://github.com/Atreusion/SWN-Generators/releases) and run the .exe file. It's super simple. It's standalone, which means it doesn't need an installer or any other files.
+
+### Running the Code Directly
+
+Download both [gengui.py](https://github.com/Atreusion/SWN-Generators/raw/master/gengui.py) and [name_container.py](https://github.com/Atreusion/SWN-Generators/raw/master/name_container.py) and either double-click gengui.py or run it through ```py``` or ```python3```.
+
+## FAQs
+
+### Why Python 3.6+?
+
+This code uses [f-strings](https://docs.python.org/3/reference/lexical_analysis.html#f-strings), or formatted string literals, a cool feature added in Python 3.6 that allows expressions to be evaluated at run time. I wanted to play around with them, so I did.
+
+### Why a separate container for the names?
+
+I don't know if there's a preferred Pythonic style for annoyingly long lists. The first_names list has 2,000 names, and the last_names list has 1,000. I could have it be two incredibly long lines, but for sanity's sake I like to break longer lists like that up to make it (usually) easier to work with. But, breaking those lists up at 80 characters made them total 400 lines long. That's over 1/3 of the length of gengui.py! To make editing gengui.py easier, I moved those two lists to name_container.py and call it in as a separate module.
+
+For all I know, this is the worst way of doing this. I make no claims that I'm a good programmer. ¯\\\_(ツ)_/¯
+
+### Has anyone actually asked you these questions?
+
+nope
 
 ## Permission
 
