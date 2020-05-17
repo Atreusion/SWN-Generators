@@ -3,30 +3,30 @@ import name_container
 import PySimpleGUI as sg
 
 generator_column = [[sg.Text('Choose generator:'), sg.InputCombo(('NPC', 'Problem', 'Place', 'Urban', 'Wilderness', 'One-roll NPC', 'One-roll Patron', 'Beast Style'), auto_size_text=True, key='_GENIN_', readonly=True)],
-                    [sg.Multiline('Generator info', size=(80,14), key='_GENOUTPUT_', do_not_clear=True)],
+                    [sg.Multiline('Generator info', size=(80,14), key='_GENOUTPUT_' + sg.WRITE_ONLY_KEY, do_not_clear=True)],
                     [sg.Button('Generate')]]
 
 roller_column = [[sg.Text('Dice Roller:'), sg.InputText(size = (2, 1), do_not_clear=True, key = "_ROLLSINPUT_"), sg.Text("d"), sg.InputText(size = (5, 1), do_not_clear=True, key = "_SIDESINPUT_")],
-                 [sg.Multiline("Rolls and total", size=(80,4), key = "_ROLLSOUTPUT_", do_not_clear=True)],
+                 [sg.Multiline("Rolls and total", size=(80,4), key = "_ROLLSOUTPUT_" + sg.WRITE_ONLY_KEY, do_not_clear=True)],
                  [sg.Button("Roll"), sg.Text("Limit of 20 dice and 10,000 sides.")],
                  [sg.Text('_' * 80)],
                  [sg.Button("Generate New First Name"), sg.Button("Generate New Last Name")],
                  [sg.InputText(default_text=f"{random.choice(name_container.first_names)} {random.choice(name_container.last_names)}", size=(24,1), key='_NAMEGENOUTPUT_')]]
 
 weapon_column = [[sg.Text('Weapon:'), sg.InputCombo(('Primitive Bow', 'Advanced Bow', 'Conversion Bow', 'Grenade', 'Crude Pistol', 'Musket', 'Revolver', 'Rifle', 'Shotgun', 'Semi-Auto Pistol', 'Submachine Gun', 'Combat Rifle', 'Combat Shotgun', 'Sniper Rifle', 'Void Carbine', 'Mag Pistol', 'Mag Rifle', 'Spike Thrower', 'Laser Pistol', 'Laser Rifle', 'Thermal Pistol', 'Plasma Projector', 'Shear Rifle', 'Thunder Gun', 'Distortion Cannon', 'Small primitive weapon', 'Medium primitive weapon', 'Large primitive weapon', 'Small advanced weapon', 'Medium advanced weapon', 'Large advanced weapon', 'Stun baton', 'Suit ripper', 'Unarmed attack'), auto_size_text=True, key='_WEAPONIN_', readonly=True, change_submits=True)],
-                 [sg.Multiline('Weapon info', size=(80,7), key='_WEAPONOUTPUT_', do_not_clear=True)],
+                 [sg.Multiline('Weapon info', size=(80,7), key='_WEAPONOUTPUT_' + sg.WRITE_ONLY_KEY, do_not_clear=True)],
                  [sg.Text("* Can be first in burst mode (3 rounds, +2 hit/+2 dmg). @ Two main actions to reload.")]]
 
 roll_example_column = [[sg.Text('Type of roll:'), sg.InputCombo(("Saving throw", "Skill check", "Initiative roll", "Attack roll", "Damage roll"), auto_size_text=True, key='_ROLLEXINFOINPUT_', readonly=True, change_submits=True)],
-                       [sg.Multiline('Roll info', size=(80,8), key='_ROLLEXINFOOUTPUT_', do_not_clear=True)],
+                       [sg.Multiline('Roll info', size=(80,8), key='_ROLLEXINFOOUTPUT_' + sg.WRITE_ONLY_KEY, do_not_clear=True)],
                        [sg.Text("")]]
 
 beastinfo_column = [[sg.Text('Beast:'), sg.InputCombo(("Small Vicious Beast", "Small Pack Hunter", "Large Pack Hunter", "Large Aggresive Prey Animal", "Lesser Lone Predator", "Greater Lone Predator", "Terrifying Apex Predator", "Gengineered Murder Beast"), auto_size_text=True, key='_BEASTINFOINPUT_', readonly=True, change_submits=True)],
-                    [sg.Multiline('Beast info', size=(80,9), key='_BEASTINFOOUTPUT_', do_not_clear=True)],
+                    [sg.Multiline('Beast info', size=(80,9), key='_BEASTINFOOUTPUT_' + sg.WRITE_ONLY_KEY, do_not_clear=True)],
                     [sg.Text("")]]
 
 npcinfo_column = [[sg.Text('NPC:'), sg.InputCombo(("Peaceful Human","Martial Human","Veteran Fighter","Elite Fighter","Heroic Fighter","Barbarian Hero","Barbarian Tribal","Gang Boss","Gang Member","Gengineered Killer","Legendary Fighter","Military Elite","Military Soldier","Normal Human","Pirate King","Police Officer","Serial Killer","Skilled Professional","Warrior Tyrant"), auto_size_text=True, key='_NPCINFOINPUT_', readonly=True, change_submits=True)],
-                    [sg.Multiline('NPC info', size=(80,9), key='_NPCINFOOUTPUT_', do_not_clear=True)],
+                    [sg.Multiline('NPC info', size=(80,9), key='_NPCINFOOUTPUT_' + sg.WRITE_ONLY_KEY, do_not_clear=True)],
                     [sg.Text("")]]
 
 layout = [[sg.Column(generator_column), sg.Column(roller_column)],
@@ -1120,12 +1120,18 @@ while True:
         output = npcinfogen(values['_NPCINFOINPUT_'])
         window.FindElement('_NPCINFOOUTPUT_').Update(output)
     if event == "Generate New First Name":
-        last_name = values['_NAMEGENOUTPUT_'].split(' ')[1]
-        output = f"{random.choice(name_container.first_names)} {last_name}"
+        try:
+            last_name = values['_NAMEGENOUTPUT_'].split(' ')[1]
+            output = f"{random.choice(name_container.first_names)} {last_name}"
+        except:
+            output = f"{random.choice(name_container.first_names)} {random.choice(name_container.last_names)}"
         window.FindElement('_NAMEGENOUTPUT_').Update(output)
     if event == "Generate New Last Name":
-        first_name = values['_NAMEGENOUTPUT_'].split(' ')[0]
-        output = f"{first_name} {random.choice(name_container.last_names)}"
+        try:
+            first_name = values['_NAMEGENOUTPUT_'].split(' ')[0]
+            output = f"{first_name} {random.choice(name_container.last_names)}"
+        except:
+            output = f"{random.choice(name_container.first_names)} {random.choice(name_container.last_names)}"
         window.FindElement('_NAMEGENOUTPUT_').Update(output)
     if event == "Roll" and values["_ROLLSINPUT_"] and values["_SIDESINPUT_"]:
         try:
